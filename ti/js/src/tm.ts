@@ -44,16 +44,25 @@ class ErgTm extends AbstractMachine {
 
         let i: number = 0
         while (i < this.processedWord.length && (this.state !== this.accept)) {
+            this.renderer.setActive(this.state)
             let transition = this.getTransition(i)
             if (transition) {
+                this.renderer.setAccepted(this.state, this.processedWord[i])
                 this.writeToTape(transition[0], i)
                 this.changeState(transition[1])
                 i = this.moveHead(transition[2], i)
             } else {
+                this.renderer.setRejected(this.state, this.word[i])
                 this.writeToTape(this.fail, i)
                 this.changeState(this.reject)
                 break
             }
+        }
+
+        if (this.accept === this.state) {            
+            this.renderer.setAccepted(this.state, null)
+        } else {
+            this.renderer.setRejected(this.state, null)
         }
 
         this.logResult()
@@ -85,104 +94,100 @@ class ErgTm extends AbstractMachine {
 
 }
 
-let tm: ErgTm;
-const input: any = document.getElementById('word')
-const submit: any = document.getElementById('submit')
-// submit.addEventListener('click', () => tm = ErgTm.init(input.value))
-
 const nodes = {
     0: {
-        node: 'body > svg > g > ellipse:nth-child(1)',
-        text: 'body > svg > g > g:nth-child(2) > switch > foreignObject > div > div > div'
+        node: '#tm > g > ellipse:nth-child(17)',
+        text: '#tm > g > g:nth-child(18) > switch > foreignObject > div > div > div'
     },
     1: {
-        node: 'body > svg > g > ellipse:nth-child(5)',
-        text: 'body > svg > g > g:nth-child(6) > switch > foreignObject > div > div > div'
+        node: '#tm > g > ellipse:nth-child(23)',
+        text: '#tm > g > g:nth-child(24) > switch > foreignObject > div > div > div'
     },
     2: {
-        node: 'body > svg > g > ellipse:nth-child(11)',
-        text: 'body > svg > g > g:nth-child(12) > switch > foreignObject > div > div > div'
+        node: '#tm > g > ellipse:nth-child(27)',
+        text: '#tm > g > g:nth-child(28) > switch > foreignObject > div > div > div'
     },
     3: {
-        node: '',
-        text: ''
+        node: '#tm > g > ellipse:nth-child(35)',
+        text: '#tm > g > g:nth-child(36) > switch > foreignObject > div > div > div'
     },
     4: {
-        node: '',
-        text: ''
+        node: '#tm > g > ellipse:nth-child(45)',
+        text: '#tm > g > g:nth-child(46) > switch > foreignObject > div > div > div'
     },
     5: {
-        node: '',
-        text: ''
+        node: '#tm > g > ellipse:nth-child(61)',
+        text: '#tm > g > g:nth-child(62) > switch > foreignObject > div > div > div'
     },
     6: {
-        node: '',
-        text: ''
+        node: '#tm > g > ellipse:nth-child(53)',
+        text: '#tm > g > g:nth-child(54) > switch > foreignObject > div > div > div'
     },
     7: {
-        node: '',
-        text: ''
+        node: '#tm > g > ellipse:nth-child(67)',
+        text: '#tm > g > g:nth-child(68) > switch > foreignObject > div > div > div'
     },
     8: {
-        node: '',
-        text: ''
+        node: '#tm > g > ellipse:nth-child(63)',
+        text: '#tm > g > g:nth-child(64) > switch > foreignObject > div > div > div'
     },
     9: {
-        node: '',
-        text: ''
+        node: '#tm > g > ellipse:nth-child(83)',
+        text: '#tm > g > g:nth-child(84) > switch > foreignObject > div > div > div'
     },
     10: {
-        node: '',
-        text: ''
+        node: '#tm > g > ellipse:nth-child(81)',
+        text: '#tm > g > g:nth-child(82) > switch > foreignObject > div > div > div'
     },
     11: {
-        node: '',
-        text: ''
+        node: '#tm > g > ellipse:nth-child(91)',
+        text: '#tm > g > g:nth-child(92) > switch > foreignObject > div > div > div'
     },
     12: {
-        node: '',
-        text: ''
+        node: '#tm > g > ellipse:nth-child(109)',
+        text: '#tm > g > g:nth-child(110) > switch > foreignObject > div > div > div'
     },
     13: {
-        node: '',
-        text: ''
+        node: '#tm > g > ellipse:nth-child(107)',
+        text: '#tm > g > g:nth-child(108) > switch > foreignObject > div > div > div'
     },
     14: {
-        node: '',
-        text: ''
+        node: '#tm > g > ellipse:nth-child(101)',
+        text: '#tm > g > g:nth-child(104) > switch > foreignObject > div > div > div'
     },
     15: {
-        node: '',
-        text: ''
-    },
-    16: {
-        node: '',
-        text: ''
-    },
-    17: {
-        node: '',
-        text: ''
-    },
-    18: {
-        node: '',
-        text: ''
-    },
-    19: {
-        node: '',
-        text: ''
+        node: '#tm > g > ellipse:nth-child(111)',
+        text: '#tm > g > g:nth-child(114) > switch > foreignObject > div > div > div'
     }
 }
 
-// Accept
-tm = ErgTm.init('BTBPVVETE', nodes)
-console.log(`Accepted: ${tm.execute()}`)
+let tm: ErgTm;
+const run = () => {
+    tm = ErgTm.init(word.value, nodes);
+    tm.setSpeed(speed.value)
+    tm.execute()
+}
 
-// tm = ErgTm.init('BPBTSSXXTVVEPE', nodes)
-// console.log(`Accepted: ${tm.execute()}`)
+const word: any = document.getElementById('word')
+const speed: any = document.getElementById('speed')
+const submit: any = document.getElementById('submit')
 
-// Abort
-// tm = ErgTm.init('BTBPVVETEE', nodes)
-// console.log(`Accepted: ${tm.execute()}`)
+// Clear value by clicking into input
+word.addEventListener('click', (event) => event.target.value = '')
+submit.addEventListener('click', run)
 
-// fsm = ErgFsm.init('BBBPVVETEE', nodes)
-// console.log(`Accepted: ${fsm.execute()}`)
+const testStrings = [
+    // Accept
+    'BTBPVVETE',
+    'BPBTSSXXTVVEPE',
+    // Abort
+    'BTBPTVVETEE',
+    'BBBPVVETEE'
+]
+
+// for (let i: number = 0; i < testStrings.length; i++) {
+//     if (i === 0) {
+//         fsm = ErgFsm.init(testStrings[i], nodes)
+//         console.log(`Accepted: ${fsm.execute()}`)
+//     }
+// }

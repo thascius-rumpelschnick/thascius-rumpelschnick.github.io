@@ -11,17 +11,26 @@
 }
 
 .t-active {
-    fill: #fff59d;
+    background-color: #fff59d;
 }
 
 .t-accept {
-    fill: #1de9b6;
+    background-color: #1de9b6;
 }
 
 .t-reject{
-    fill: #f4511e;
+    background-color: #f4511e;
 }
 
 .g-transition {
     transition: all .2s ease-in-out;
+}
+
+#fsm > g > ellipse:nth-child(78),
+#tm > g > ellipse:nth-child(112) {
+    fill: #1de9b6;
+}
+
+#tm > g > ellipse:nth-child(102) {
+    fill: #f4511e;
 }

@@ -42,20 +42,21 @@ class ErgFsm extends AbstractMachine {
             this.renderer.setActive(this.state)
             let transition = this.getTransition(i)
             if (transition) {
-                this.renderer.setAccepted(this.state, this.word[i])
+                this.renderer.setAccepted(this.state, this.word[i], this.transitions[this.state])
                 this.changeState(transition)
             } else {
-                this.renderer.setRejected(this.state, this.word[i])
+                this.renderer.setRejected(this.state, this.word[i], this.transitions[this.state])
                 this.changeState('q0')
                 break
             }
         }        
 
         if (this.accept === this.state) {            
-            this.renderer.setAccepted(this.state, null)
-        } else {
-            this.renderer.setRejected(this.state, null)
-        }
+            this.renderer.setAccepted(this.state, null, null)
+        } 
+        // else {
+        //     this.renderer.setRejected(this.state, null, null)
+        // }
 
         this.logResult()
 
