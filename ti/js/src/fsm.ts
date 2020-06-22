@@ -52,7 +52,7 @@ class ErgFsm extends AbstractMachine {
         }        
 
         if (this.accept === this.state) {            
-            this.renderer.setAccepted(this.state, null, null)
+            this.renderer.setAccepted(this.state)
         } 
         // else {
         //     this.renderer.setRejected(this.state, null, null)

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Embedded Reber Grammar - Turing Maschine</title>
+    <title>Embedded Reber Grammar - Turingmaschine</title>
 
     <!-- CSS-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -17,13 +17,13 @@
     <nav class="light-blue lighten-1" role="navigation">
         <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Theoretische Informatik</a>
             <ul class="right hide-on-med-and-down">
-                <li><a href="./fsm.html">DEA</a></li>
-                <li><a href="#">TM</a></li>
+                <li><a href="./fsm.html">Deterministischer Endlicher Automat</a></li>
+                <li><a href="#">Turingmaschine</a></li>
             </ul>
 
             <ul id="nav-mobile" class="sidenav">
-                <li><a href="#">DEA</a></li>
-                <li><a href="./tm.html">TM</a></li>
+                <li><a href="./fsm.html">Deterministischer Endlicher Automat</a></li>
+                <li><a href="#">Turingmaschine</a></li>
             </ul>
             <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
         </div>
@@ -31,23 +31,72 @@
 
     <main class="container">
         <div class="row center">
-            <h1>Embedded Reber Grammar - Turing Maschine</h1>
+            <h1>Embedded Reber Grammar - Turingmaschine</h1>
+            <p>
+                Auf dieser Seite findet sich eine Implementierung einer Turingmaschine. <br> 
+                Dieser Automat erkennt Wörter nach der Grammatik der <a href="https://cnl.salk.edu/~schraudo/teach/NNcourse/reber.html">eingebetteten Rebergrammatik</a>. 
+            </p>
+            <h3>Wie funktioniert es?</h3>
+            <p>
+                Geben Sie unten in das Eingabefeld das zu &uuml;berpr&uuml;fende Wort ein. (Klicken Sie auf das Fragezeichen für weitere Hilfestellungen). <br>
+                <br>
+                <br>
+                <br>
+                M&ouml;gliche Wörter:
+
+                <table class="centered">
+                    <thead>
+                        <th>Valide</th>
+                        <th>Nicht valide</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>BPBTSSXXTVVEPE</td>
+                            <td>BTSSPXSE</td>
+                        </tr>
+                        <tr>
+                            <td>BTBPVVETE</td>
+                            <td>BPBTSSSSSXXTTVPSEPE</td>
+                        </tr>
+                        <tr>
+                            <td>BTBPVVETE</td>
+                            <td>BTSSSE</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </p>
+            <br>
+            <br>
+            <br>
+            <p>
+                Dann wählen Sie eine Animationseschwindigkeit. Dann drücken Sie auf den Button "&Uuml;berpr&uuml;fen". <br>
+                Nun können Sie die einzelnen Schritte zur Abarbeitung einmal im Graphendiagramm und einmal in der Tabelle mit den <br>
+                Zustandsüberprüfungen nachvollziehen.
+            </p>
+            <br>
+            <br>
+            <br>
+            <p>
+                Die Daten zur Turingmaschine finden Sie unten auf der Seite im Footer.
+            </p>
         </div>
 
         <div class="card">            
             <div class="card-content">
-                <span class="card-title activator grey-text text-darken-4">Card Title<i class="material-icons right">help_outline</i></span>
-                <div>
+                <span class="card-title activator grey-text text-darken-4">Eingaben:<i class="material-icons right">help_outline</i></span>
+                <div class="center-align">
                     <label for="word">Zu &uuml;berpr&uuml;fendes Wort:</label>
                     <input id="word" type="text" pattern="^[bepstvxBEPSTVX]+$/" required />
                 </div>
-                <div>
+                <br>
+                <div class="center-align">
                     <p class="range-field">
                         <label for="range">Animationseschwindigkeit:</label>
                         <input type="range" id="speed" min="1" max="3" />
                     </p>
                 </div>
-                <div>
+                <br>
+                <div class="center-align">
                     <button id="submit" class="btn waves-effect waves-light" type="submit"
                         name="action">&Uuml;berpr&uuml;fen
                         <i class="material-icons right">play_arrow</i>
@@ -55,255 +104,257 @@
                 </div>
             </div>
             <div class="card-reveal">
-                <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
-                <p>Here is some more information about this product that is only revealed once clicked on.</p>
+                <span class="card-title grey-text text-darken-4">Hilfe zur Eingabe:<i class="material-icons right">close</i></span>
+                <p>Das Wort darf nur die Buchstaben B, E, P, S, T, V, X und keine Leerzeichen enthalten. <br>
+                   Es kann nur ein Wort überpr&uuml;ft werden. 
+                </p>
+                <p>Mit dem Schieberegler k&ouml;nnen sie die Animationsgeschwindigkeit in 3 Stufen regeln: langsam, normal, schnell.</p>
             </div>
-        </div>
+        </div>        
 
-        
-
-        <div class="row center">
-            <img id="tm" src="./assets/tm.svg" alt="Graph" onload="SVGInject(this, { makeIdsUnique: false, copyAttributes: true })" />
-        </div>
-
-        <div class="row center">
-           <div class="col s6 offset-s3">
-            <table id="transitions" class="striped">                
-                <thead>
-                    <tr>
-                        <th>Zustand</th>
-                        <th>Eingabe</th>
-                        <th>Folgezustand</th>
-                        <th>Geschriebenes Zeichen</th>
-                        <th>Richtung</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>q0</td>
-                        <td>B</td>
-                        <td>q1</td>
-                        <td>blank</td>
-                        <td>R</td>
-                    </tr>
-                    <tr>
-                        <td>q1</th>
-                        <td>T</td>
-                        <td>q2</td>
-                        <td>T</td>
-                        <td>R</td>
-                    </tr>
-                    <tr>
-                        <td>q1</td>
-                        <td>P</td>
-                        <td>q2</td>
-                        <td>P</td>
-                        <td>R</td>
-                    </tr>
-                    <tr>
-                        <td>q2</td>
-                        <td>B</td>
-                        <td>q3</td>
-                        <td>blank</td>
-                        <td>R</td>
-                    </tr>
-                    <tr>
-                        <td>q3</td>
-                        <td>T</td>
-                        <td>q4</td>
-                        <td>blank</td>
-                        <td>R</td>
-                    </tr>
-                    <tr>
-                        <td>q3</td>
-                        <td>P</td>
-                        <td>q6</td>
-                        <td>blank</td>
-                        <td>R</td>
-                    </tr>
-                    <tr>
-                        <td>q4</td>
-                        <td>S</td>
-                        <td>q4</td>
-                        <td>blank</td>
-                        <td>R</td>
-                    </tr>
-                    <tr>
-                        <td>q4</td>
-                        <td>X</td>
-                        <td>q5</td>
-                        <td>blank</td>
-                        <td>R</td>
-                    </tr>
-                    <tr>
-                        <td>q5</td>
-                        <td>X</td>
-                        <td>q6</td>
-                        <td>blank</td>
-                        <td>R</td>
-                    </tr>
-                    <tr>
-                        <td>q5</td>
-                        <td>S</td>
-                        <td>q8</td>
-                        <td>blank</td>
-                        <td>R</td>
-                    </tr>
-                    <tr>
-                        <td>q6</td>
-                        <td>T</td>
-                        <td>q6</td>
-                        <td>blank</td>
-                        <td>R</td>
-                    </tr>
-                    <tr>
-                        <td>q6</td>
-                        <td>V</td>
-                        <td>q7</td>
-                        <td>blank</td>
-                        <td>R</td>
-                    </tr>
-                    <tr>
-                        <td>q7</td>
-                        <td>P</td>
-                        <td>q5</td>
-                        <td>blank</td>
-                        <td>R</td>
-                    </tr>
-                    <tr>
-                        <td>q7</td>
-                        <td>V</td>
-                        <td>q8</td>
-                        <td>blank</td>
-                        <td>R</td>
-                    </tr>
-                    <tr>
-                        <td>q8</td>
-                        <td>E</td>
-                        <td>q9</td>
-                        <td>blank</td>
-                        <td>R</td>
-                    </tr>
-                    <tr>
-                        <td>q9</td>
-                        <td>T</td>
-                        <td>q10</td>
-                        <td>T</td>
-                        <td>R</td>
-                    </tr>
-                    <tr>
-                        <td>q9</td>
-                        <td>P</td>
-                        <td>q10</td>
-                        <td>P</td>
-                        <td>R</td>
-                    </tr>
-                    <tr>
-                        <td>q10</td>
-                        <td>E</td>
-                        <td>q11</td>
-                        <td>blank</td>
-                        <td>R</td>
-                    </tr>
-                    <tr>
-                        <td>q11</td>
-                        <td>blank</td>
-                        <td>q11</td>
-                        <td>blank</td>
-                        <td>L</td>
-                    </tr>
-                    <tr>
-                        <td>q11</td>
-                        <td>T</td>
-                        <td>q12</td>
-                        <td>blank</td>
-                        <td>L</td>
-                    </tr>
-                    <tr>
-                        <td>q11</td>
-                        <td>P</td>
-                        <td>q13</td>
-                        <td>blank</td>
-                        <td>L</td>
-                    </tr>
-                    <tr>
-                        <td>q12</td>
-                        <td>blank</td>
-                        <td>q12</td>
-                        <td>blank</td>
-                        <td>L</td>
-                    </tr>
-                    <tr>
-                        <td>q12</td>
-                        <td>T</td>
-                        <td class="t-accept">q15</td>
-                        <td>blank</td>
-                        <td>H</td>
-                    </tr>
-                    <tr>
-                        <td>q12</td>
-                        <td>P</td>
-                        <td class="t-reject">q14</td>
-                        <td>blank</td>
-                        <td>H</td>
-                    </tr>
-                    <tr>
-                        <td>q13</td>
-                        <td>blank</td>
-                        <td>q13</td>
-                        <td>blank</td>
-                        <td>L</td>
-                    </tr>
-                    <tr>
-                        <td>q13</td>
-                        <td>P</td>
-                        <td class="t-accept">q15</td>
-                        <td>blank</td>
-                        <td>H</td>
-                    </tr>
-                    <tr>
-                        <td>q13</td>
-                        <td>T</td>
-                        <td class="t-reject">q15</td>
-                        <td>blank</td>
-                        <td>H</td>
-                    </tr>
-                </tbody>
-            </table>
-           </div>
-        </div>
-
-        <div class="row center">
-            <p>Lorem ipsum..</p>
-        </div>
+        <ul class="collapsible">
+            <li class="active">
+              <div class="collapsible-header"><i class="material-icons">image</i>Graphendiagramm</div>
+              <div class="collapsible-body">
+                <div class="row center">
+                    <img id="tm" src="./assets/tm.svg" alt="Graph" onload="SVGInject(this, { makeIdsUnique: false, copyAttributes: true })" />
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="collapsible-header"><i class="material-icons">view_list</i>Zustands&uuml;berf&uuml;hrungen</div>
+              <div class="collapsible-body">
+                <div class="row center">
+                    <div class="col s6 offset-s3">
+                     <table id="transitions" class="striped">                
+                         <thead>
+                             <tr>
+                                 <th>Zustand</th>
+                                 <th>Eingabe</th>
+                                 <th>Folgezustand</th>
+                                 <th>Geschriebenes Zeichen</th>
+                                 <th>Richtung</th>
+                             </tr>
+                         </thead>
+                         <tbody>
+                             <tr>
+                                 <td>q0</td>
+                                 <td>B</td>
+                                 <td>q1</td>
+                                 <td>blank</td>
+                                 <td>R</td>
+                             </tr>
+                             <tr>
+                                 <td>q1</th>
+                                 <td>T</td>
+                                 <td>q2</td>
+                                 <td>T</td>
+                                 <td>R</td>
+                             </tr>
+                             <tr>
+                                 <td>q1</td>
+                                 <td>P</td>
+                                 <td>q2</td>
+                                 <td>P</td>
+                                 <td>R</td>
+                             </tr>
+                             <tr>
+                                 <td>q2</td>
+                                 <td>B</td>
+                                 <td>q3</td>
+                                 <td>blank</td>
+                                 <td>R</td>
+                             </tr>
+                             <tr>
+                                 <td>q3</td>
+                                 <td>T</td>
+                                 <td>q4</td>
+                                 <td>blank</td>
+                                 <td>R</td>
+                             </tr>
+                             <tr>
+                                 <td>q3</td>
+                                 <td>P</td>
+                                 <td>q6</td>
+                                 <td>blank</td>
+                                 <td>R</td>
+                             </tr>
+                             <tr>
+                                 <td>q4</td>
+                                 <td>S</td>
+                                 <td>q4</td>
+                                 <td>blank</td>
+                                 <td>R</td>
+                             </tr>
+                             <tr>
+                                 <td>q4</td>
+                                 <td>X</td>
+                                 <td>q5</td>
+                                 <td>blank</td>
+                                 <td>R</td>
+                             </tr>
+                             <tr>
+                                 <td>q5</td>
+                                 <td>X</td>
+                                 <td>q6</td>
+                                 <td>blank</td>
+                                 <td>R</td>
+                             </tr>
+                             <tr>
+                                 <td>q5</td>
+                                 <td>S</td>
+                                 <td>q8</td>
+                                 <td>blank</td>
+                                 <td>R</td>
+                             </tr>
+                             <tr>
+                                 <td>q6</td>
+                                 <td>T</td>
+                                 <td>q6</td>
+                                 <td>blank</td>
+                                 <td>R</td>
+                             </tr>
+                             <tr>
+                                 <td>q6</td>
+                                 <td>V</td>
+                                 <td>q7</td>
+                                 <td>blank</td>
+                                 <td>R</td>
+                             </tr>
+                             <tr>
+                                 <td>q7</td>
+                                 <td>P</td>
+                                 <td>q5</td>
+                                 <td>blank</td>
+                                 <td>R</td>
+                             </tr>
+                             <tr>
+                                 <td>q7</td>
+                                 <td>V</td>
+                                 <td>q8</td>
+                                 <td>blank</td>
+                                 <td>R</td>
+                             </tr>
+                             <tr>
+                                 <td>q8</td>
+                                 <td>E</td>
+                                 <td>q9</td>
+                                 <td>blank</td>
+                                 <td>R</td>
+                             </tr>
+                             <tr>
+                                 <td>q9</td>
+                                 <td>T</td>
+                                 <td>q10</td>
+                                 <td>T</td>
+                                 <td>R</td>
+                             </tr>
+                             <tr>
+                                 <td>q9</td>
+                                 <td>P</td>
+                                 <td>q10</td>
+                                 <td>P</td>
+                                 <td>R</td>
+                             </tr>
+                             <tr>
+                                 <td>q10</td>
+                                 <td>E</td>
+                                 <td>q11</td>
+                                 <td>blank</td>
+                                 <td>R</td>
+                             </tr>
+                             <tr>
+                                 <td>q11</td>
+                                 <td>blank</td>
+                                 <td>q11</td>
+                                 <td>blank</td>
+                                 <td>L</td>
+                             </tr>
+                             <tr>
+                                 <td>q11</td>
+                                 <td>T</td>
+                                 <td>q12</td>
+                                 <td>blank</td>
+                                 <td>L</td>
+                             </tr>
+                             <tr>
+                                 <td>q11</td>
+                                 <td>P</td>
+                                 <td>q13</td>
+                                 <td>blank</td>
+                                 <td>L</td>
+                             </tr>
+                             <tr>
+                                 <td>q12</td>
+                                 <td>blank</td>
+                                 <td>q12</td>
+                                 <td>blank</td>
+                                 <td>L</td>
+                             </tr>
+                             <tr>
+                                 <td>q12</td>
+                                 <td>T</td>
+                                 <td class="t-accept">q15</td>
+                                 <td>blank</td>
+                                 <td>H</td>
+                             </tr>
+                             <tr>
+                                 <td>q12</td>
+                                 <td>P</td>
+                                 <td class="t-reject">q14</td>
+                                 <td>blank</td>
+                                 <td>H</td>
+                             </tr>
+                             <tr>
+                                 <td>q13</td>
+                                 <td>blank</td>
+                                 <td>q13</td>
+                                 <td>blank</td>
+                                 <td>L</td>
+                             </tr>
+                             <tr>
+                                 <td>q13</td>
+                                 <td>P</td>
+                                 <td class="t-accept">q15</td>
+                                 <td>blank</td>
+                                 <td>H</td>
+                             </tr>
+                             <tr>
+                                 <td>q13</td>
+                                 <td>T</td>
+                                 <td class="t-reject">q14</td>
+                                 <td>blank</td>
+                                 <td>H</td>
+                             </tr>
+                         </tbody>
+                     </table>
+                    </div>
+                 </div>
+              </div>
+            </li>
+          </ul>      
     </main>
 
     <footer class="page-footer orange">
         <div class="container">
             <div class="row">
                 <div class="col l6 s12">
-                    <h5 class="white-text">Company Bio</h5>
-                    <p class="grey-text text-lighten-4">We are a team of college students working on this project like
-                        it's our full time job. Any amount would help support and continue development on this project
-                        and is greatly appreciated.</p>
+                    <h5 class="white-text">Formale Definition</h5>
+                    <p class="grey-text text-lighten-4">
+                        TM = (Q, &Sigma;, &Gamma;, &delta;, q0, blank, F)
+                    </p>
                 </div>
                 <div class="col l3 s12">
-                    <h5 class="white-text">Settings</h5>
+                    <h5 class="white-text">Zust&auml;nde und Eingabealphabet</h5>
                     <ul>
-                        <li><a class="white-text" href="#!">Link 1</a></li>
-                        <li><a class="white-text" href="#!">Link 2</a></li>
-                        <li><a class="white-text" href="#!">Link 3</a></li>
-                        <li><a class="white-text" href="#!">Link 4</a></li>
+                        <li class="white-text">Q = {q0, q1, q2, q3, q4, q5, ..., q16}</li>
+                        <li class="white-text">&Sigma; = {B, E, P, S, T, V, X}</li>
+                        <li class="white-text">&Gamma; = {B, E, P, S, T, V, X, blank, F}</li>
+                        <li class="white-text">&Gamma; = {q14, q15}</li>
+                        <li class="white-text">blank = F</li>
                     </ul>
                 </div>
-                <div class="col l3 s12">
-                    <h5 class="white-text">Connect</h5>
-                    <ul>
-                        <li><a class="white-text" href="#!">Link 1</a></li>
-                        <li><a class="white-text" href="#!">Link 2</a></li>
-                        <li><a class="white-text" href="#!">Link 3</a></li>
-                        <li><a class="white-text" href="#!">Link 4</a></li>
-                    </ul>
+                <div class="col l3 s12">                  
                 </div>
             </div>
         </div>
@@ -315,6 +366,12 @@
     </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var elems = document.querySelectorAll('.collapsible');
+            var instances = M.Collapsible.init(elems, {});
+          });
+    </script>
     <script src="js/tm.js" type="module"></script>
 </body>
 </html>

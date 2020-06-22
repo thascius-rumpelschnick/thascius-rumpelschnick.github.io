@@ -47,12 +47,12 @@ class ErgTm extends AbstractMachine {
             this.renderer.setActive(this.state)
             let transition = this.getTransition(i)
             if (transition) {
-                this.renderer.setAccepted(this.state, this.processedWord[i])
+                this.renderer.setAccepted(this.state, this.word[i], this.transitions[this.state])
                 this.writeToTape(transition[0], i)
                 this.changeState(transition[1])
                 i = this.moveHead(transition[2], i)
             } else {
-                this.renderer.setRejected(this.state, this.word[i])
+                this.renderer.setRejected(this.state, this.word[i], this.transitions[this.state])
                 this.writeToTape(this.fail, i)
                 this.changeState(this.reject)
                 break
@@ -60,9 +60,9 @@ class ErgTm extends AbstractMachine {
         }
 
         if (this.accept === this.state) {            
-            this.renderer.setAccepted(this.state, null)
+            this.renderer.setAccepted(this.state)
         } else {
-            this.renderer.setRejected(this.state, null)
+            this.renderer.setRejected(this.state)
         }
 
         this.logResult()

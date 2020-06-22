@@ -61,7 +61,7 @@ export default class Renderer {
         this.animateTable(state, null, 't-active', null)
     }
 
-    public setAccepted(state: string, character: string, transition: object): void {
+    public setAccepted(state: string, character: string = null, transition: object = null): void {
         const parsedState: number = this.parseStateToInt(state)
 
         if (!this.containsData(parsedState)) return
@@ -69,19 +69,21 @@ export default class Renderer {
         const node = document.querySelector(this.nodes[parsedState].node)
         const text = document.querySelector(this.nodes[parsedState].text)
 
-        character = ('0' === character) ? ' ' : character
+        character = ('0' === character) ? 'blank' : character
 
         this.animate(node, text, character, 'n-accept')
         this.animateTable(state, character, 't-accept', transition)
     }
 
-    public setRejected(state: string, character: string, transition: object): void {
+    public setRejected(state: string, character: string = null, transition: object = null): void {
         const parsedState: number = this.parseStateToInt(state)
 
         if (!this.containsData(parsedState)) return
 
         const node: any = document.querySelector(this.nodes[parsedState].node)
         const text: any = document.querySelector(this.nodes[parsedState].text)
+
+        character = ('0' === character) ? 'blank' : character
 
         this.animate(node, text, character, 'n-reject')
         this.animateTable(state, character, 't-reject', transition)
@@ -104,12 +106,14 @@ export default class Renderer {
     protected animateTable(state: string, character: string, className: string, transition: object = null): void {      
         setTimeout((state, className, character, transition) => {
             this.prepareRows()     
-            // ToDo: needs recursive implementation      
+            // ToDo: needs recursive implementation  
+            let found: boolean = false    
             this.tableRows.forEach((row: any) => {
-                if ((null !== row.firstElementChild) && state === row.firstElementChild.innerText && (null !== transition)) {
+                if (!found && (null !== row.firstElementChild) && state === row.firstElementChild.innerText && (null !== transition)) {
                     row.childNodes.forEach((child) => {
                             if ((null !== child.innerText) && (transition[character] === child.innerText)) {
-                                row.classList.add(className)                                
+                                row.classList.add(className)    
+                                found = true                            
                             }
                     })
                 } else if ((null !== row.firstElementChild) && state === row.firstElementChild.innerText) {
