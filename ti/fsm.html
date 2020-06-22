@@ -128,6 +128,13 @@
               <div class="collapsible-header"><i class="material-icons">image</i>Graphendiagramm</div>
               <div class="collapsible-body">
                 <div class="row center">
+                    <p>
+                        Gelb markkiert den aktiven Zustand, grün einen Übergang zum Folgezustand und rot einen Zustand ohne <br>
+                        Folgezustand bzw. den verwerfenden Zusand
+                    </p>
+                    <p>
+                        Der jeweilige Buchstabe wird dann nach Überprüfung im Zustand angezeigt.
+                    </p>
                     <img id="fsm" src="./assets/fsm.svg" alt="Graph" onload="SVGInject(this, { makeIdsUnique: false, copyAttributes: true })" />
                 </div>
               </div>
@@ -137,6 +144,9 @@
               <div class="collapsible-body">
                 <div class="row center">
                     <div class="col s6 offset-s3">
+                        <p>
+                            Das grün markierte Feld ist die Überführung in den akzeptierten Zustand.
+                        </p>
                         <table id="transitions" class="striped">
                             <thead>
                                 <tr>
@@ -321,7 +331,12 @@
                         <li class="white-text">&Sigma; = {B, E, P, S, T, V, X}</li>
                     </ul>
                 </div>
-                <div class="col l3 s12">                  
+                <div class="col l3 s12">
+                    <h5 class="white-text">Quellcode:</h5>
+                    <ul>
+                      <li><a class="white-text" href="https://github.com/thascius-rumpelschnick/thascius-rumpelschnick.github.io/tree/master/ti/js/src">Quellcode DEA</a></li>
+                    </ul>
+                  </div>
                 </div>
             </div>
         </div>
