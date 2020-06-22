@@ -1,0 +1,27 @@
+.n-active {
+    fill: #fff59d;
+}
+
+.n-accept {
+    fill: #1de9b6;
+}
+
+.n-reject{
+    fill: #f4511e;
+}
+
+.t-active {
+    fill: #fff59d;
+}
+
+.t-accept {
+    fill: #1de9b6;
+}
+
+.t-reject{
+    fill: #f4511e;
+}
+
+.g-transition {
+    transition: all .2s ease-in-out;
+}

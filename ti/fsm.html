@@ -1,13 +1,141 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Embedded Reber Grammar - Deterministischer Endlicher Automat</title>
+
+     <!-- CSS-->
+     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+     <link rel="stylesheet" href="./css/styles.css">
+
+     <!-- Scripts -->
+     <script src="./js/svg-inject.min.js"></script>
 </head>
+
 <body>
-    <h1>Embedded Reber Grammar - Deterministischer Endlicher Automat</h1>
-    <p>Lorem ipsum..</p>
-    <script src="js/fsm.js"></script>
+    <nav class="light-blue lighten-1" role="navigation">
+        <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Thascius Rumpelschnick</a>
+            <ul class="right hide-on-med-and-down">
+                <li><a href="#">DEA</a></li>
+                <li><a href="./tm.html">TM</a></li>
+            </ul>
+
+            <ul id="nav-mobile" class="sidenav">
+                <li><a href="#">DEA</a></li>
+                <li><a href="./tm.html">TM</a></li>
+            </ul>
+            <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        </div>
+    </nav>
+
+    <main class="container">
+        <div class="row center">
+            <h1>Embedded Reber Grammar - Deterministischer Endlicher Automat</h1>
+        </div>
+
+        <div class="row center">
+            <div class="col s6 offset-s3">
+                <input id="word" type="text" pattern="^[bepstvxBEPSTVX]+$/" required />
+            </div>          
+        </div>
+        <div class="row center">
+            <div class="col s2 offset-s5">
+                <p class="range-field">
+                    <input type="range" id="speed" min="1" max="3" />
+                </p>
+            </div>
+        </div>
+        <div class="row center">
+            <div class="col s2 offset-s5">
+                <button id="submit" class="btn waves-effect waves-light" type="submit" name="action">Submit
+                    <i class="material-icons right">send</i>
+                </button>
+            </div>
+        </div>
+
+        <div class="row center">
+            <img id="fsm" src="./assets/fsm.svg" alt="Graph" onload="SVGInject(this, { makeIdsUnique: false, copyAttributes: true })" />
+        </div>
+
+        <div class="row center">
+           <div class="col s6 offset-s3">
+            <table>
+                <thead>
+                  <tr>
+                      <th>State</th>
+                      <th>Input</th>
+                      <th>State Transition</th>
+                  </tr>
+                </thead>
+        
+                <tbody>
+                  <tr>
+                    <td>q0</td>
+                    <td>B</td>
+                    <td>q1</td>
+                  </tr>
+                  <tr>
+                    <td>q1</td>
+                    <td>T</td>
+                    <td>q2</td>
+                  </tr>
+                  <tr>
+                    <td>Jonathan</td>
+                    <td>Lollipop</td>
+                    <td>$7.00</td>
+                  </tr>
+                </tbody>
+              </table>
+           </div>
+        </div>
+
+        <div class="row center">
+            <p>Lorem ipsum..</p>
+        </div>
+    </main>
+
+    <footer class="page-footer orange">
+        <div class="container">
+            <div class="row">
+                <div class="col l6 s12">
+                    <h5 class="white-text">Company Bio</h5>
+                    <p class="grey-text text-lighten-4">We are a team of college students working on this project like
+                        it's our full time job. Any amount would help support and continue development on this project
+                        and is greatly appreciated.</p>
+                </div>
+                <div class="col l3 s12">
+                    <h5 class="white-text">Settings</h5>
+                    <ul>
+                        <li><a class="white-text" href="#!">Link 1</a></li>
+                        <li><a class="white-text" href="#!">Link 2</a></li>
+                        <li><a class="white-text" href="#!">Link 3</a></li>
+                        <li><a class="white-text" href="#!">Link 4</a></li>
+                    </ul>
+                </div>
+                <div class="col l3 s12">
+                    <h5 class="white-text">Connect</h5>
+                    <ul>
+                        <li><a class="white-text" href="#!">Link 1</a></li>
+                        <li><a class="white-text" href="#!">Link 2</a></li>
+                        <li><a class="white-text" href="#!">Link 3</a></li>
+                        <li><a class="white-text" href="#!">Link 4</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+                Made by <a class="orange-text text-lighten-3" href="http://materializecss.com">Materialize</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>-->
+    <script type="module" src="js/fsm.js"></script>
 </body>
+
 </html>

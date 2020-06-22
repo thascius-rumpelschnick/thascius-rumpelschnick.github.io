@@ -4,18 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Embedded Reber Grammar - Turing Maschine</title>
+
+    <!-- CSS-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="./css/styles.css">
+
+    <!-- Scripts -->
+    <script src="./js/svg-inject.min.js"></script>
 </head>
 <body>
     <h1>Embedded Reber Grammar - Turing Maschine</h1>
 
     <div>
        <form >
-        <input type="text" pattern="^[BEPSTVX]*$" id="word" required>
+        <input type="text" pattern="^[bepstvxBEPSTVX]+$/" id="word" required>
         <input type="submit" id="submit">
        </form>
     </div>
 
     <p>Lorem ipsum..</p>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="js/tm.js" type="module"></script>
 </body>
 </html>

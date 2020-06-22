@@ -2,7 +2,7 @@
 
 ## Notes
 
-tsc --inlineSourceMap --module ES6 --outDir ../ tm.ts
+tsc --inlineSourceMap --module ES6 --outDir ../ *.ts
 
 ## Prämissen
 
@@ -64,6 +64,7 @@ BP BP TE PE
 
 ### Valide
 
+bpbtsssssxxttvpsepe
 BPBTSSXXTVVEPE
 BTBPVVETE
 BTXXVPSE
