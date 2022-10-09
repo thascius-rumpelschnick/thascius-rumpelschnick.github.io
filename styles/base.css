@@ -1,0 +1,51 @@
+/* Variables */
+:root {
+  --main-font-color-light: rgb(132, 132, 132);
+  --main-font-color: rgb(68, 68, 68);
+
+  --main-bg-color: rgb(238, 238, 238);
+  --section-bg-color: rgb(255, 255, 255);
+
+  --blue: rgb(40, 121, 255);
+  --green: rgb(1, 200, 83);
+  --orange: rgb(254, 193, 7);
+  --red: rgb(255, 61, 0);
+
+  --section-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.03), 0 3px 1px -2px rgba(0, 0, 0, 0.03), 0 1px 5px 0 rgba(0, 0, 0, 0.03);
+  --section-border-radius: 2px;
+
+  --standard-margin: 1rem;
+  --standard-padding: 1rem2
+}
+
+body {
+  font-family: "Kumbh Sans";
+  font-weight: lighter;
+  color: var(--main-font-color);
+  background-color: var(--main-bg-color);
+}
+
+/* Headings */
+h1 {
+  font-size: 3rem;
+}
+
+h2 {
+  font-size: 2rem;
+  margin-top: 2rem;
+}
+
+h3,
+h4,
+h5,
+h6 {
+  color: var(--main-font-color-light);
+  font-size: 1.5rem;
+  margin-top: 1rem;
+}
+
+/* Links */
+a {
+  color: var(--main-font-color-light);
+  text-decoration: none;
+}
