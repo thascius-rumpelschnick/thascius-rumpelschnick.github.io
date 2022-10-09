@@ -2,7 +2,8 @@
 
 ## Notes
 
-tsc --inlineSourceMap --module ES6 --outDir ../ *.ts
+    tsc --inlineSourceMap --module ES6 --outDir ../ *.ts  
+    npx tsc --inlineSourceMap --module ES6 --outDir ../ *.ts  
 
 ## Prämissen
 
