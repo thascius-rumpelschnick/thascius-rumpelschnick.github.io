@@ -20,6 +20,7 @@ define(["exports", "scenegraph", "animation"], function (
 	 *
 	 */
 	function init() {
+		var cube = scenegraph.createNodeWithModel("cube", "cube");
 		var insideOutPoly = scenegraph.createNodeWithModel("insideOutPoly", "insideOutPoly");
 
 		return;

@@ -117,6 +117,7 @@ function(exports, shader, framebuffer, data) {
 
 		// z is linearly interpolated with delta dz in each step of the driving variable.
 		var dz;
+		let currentZ = startZ;
 
 		// Prepare bi-linear interpolation for shading and textureing.
 		// Interpolated weight in interval [0,1] of the starting- and end-point of the current edge.
@@ -133,7 +134,7 @@ function(exports, shader, framebuffer, data) {
 
 		// Skip it, if the line is just a point.
 		if (startX == endX && startY == endY) {
-			framebuffer.set(startX, startY, startZ, color);
+			framebuffer.set(x, y, startZ, color);
 			return;
 		}
 
@@ -141,10 +142,11 @@ function(exports, shader, framebuffer, data) {
 		// as the end point of the previous edge.
 		// In any case, do not add an intersection for start point here,
 		// this should happen later in the scanline function.
-		framebuffer.set(x, y, getZ(x, y), color);
+		framebuffer.set(x, y, startZ, color);
 
 		// Distinction of cases for driving variable.
 		if (dXAbs >= dYAbs) {
+			dz = endZ - startZ / Math.abs(endX - startX);
 			// x is driving variable.
 			var previousY = y - dYSign;
 			e = dXAbs - dYAbs2;
@@ -168,7 +170,7 @@ function(exports, shader, framebuffer, data) {
 					addIntersection(
 						x,
 						y,
-						getZ(x, y),
+						currentZ,
 						interpolationWeight,
 						edgeStartVertexIndex,
 						edgeEndVertexIndex,
@@ -176,11 +178,13 @@ function(exports, shader, framebuffer, data) {
 						edgeEndTextureCoord
 					);
 				}
-				framebuffer.set(x, y, getZ(x, y), color);
+				framebuffer.set(x, y, currentZ, color);
 				previousY = y;
+				currentZ += dz;
 			}
 		} else {
 			// y is driving variable.
+			dz = endZ - startZ / Math.abs(endY - startY);
 			e = dYAbs - dXAbs2;
 			while (y != endY) {
 				y += dYSign;
@@ -196,7 +200,7 @@ function(exports, shader, framebuffer, data) {
 					addIntersection(
 						x,
 						y,
-						getZ(x, y),
+						currentZ,
 						interpolationWeight,
 						edgeStartVertexIndex,
 						edgeEndVertexIndex,
@@ -204,6 +208,9 @@ function(exports, shader, framebuffer, data) {
 						edgeEndTextureCoord
 					);
 				}
+
+				framebuffer.set(x, y, currentZ, color);
+				currentZ += dz;
 			}
 		}
 		// END exercise Bresenham
@@ -252,7 +259,7 @@ function(exports, shader, framebuffer, data) {
 		// Maybe skip polygons that are perpendicular to the screen / xy-plane.
 		// The plane calculation can be commented out if bi-linear interpolation is applied.
 		if (!calcPlaneEquation(vertices, polygon)) {
-			//console.log("Skip plane(polygon) is perpendicular to the screen / xy-plane, color: " + color.name);
+			// console.log("Skip plane(polygon) is perpendicular to the screen / xy-plane, color: " + color.name);
 			return;
 		}
 
@@ -297,7 +304,7 @@ function(exports, shader, framebuffer, data) {
 
 			nextX = Math.floor(end[0]);
 			nextY = Math.floor(end[1]);
-			nextZ = end[0];
+			nextZ = end[2];
 
 			var edgeStartVertexIndex = st;
 			var edgeEndVertexIndex = end;
@@ -486,43 +493,58 @@ function(exports, shader, framebuffer, data) {
 		// Fill polygon line by line using the scanline algorithm.
 		// Loop over non empty scan lines.
 		for (let i = 0; i < scanlineIntersection.length; i++) {
-			if (scanlineIntersection[i] === undefined) continue; // No points on this line
+			if ((scanlineIntersection[i] === undefined )|| (scanlineIntersection[i].length % 2 !== 0)) continue;
 			
-			if (scanlineIntersection[i].length % 2 !== 0) continue;
-			
-			if (scanlineIntersection[i].length === 2) {
-				let sorted = scanlineIntersection[i].sort((a, b) => a.x - b.x);
-				let minX = sorted[0].x;
-				let maxX = sorted[sorted.length - 1].x;
-				drawLineBresenham(minX, i, 0, maxX, i, 0, data.getColorByName("red"));
-			} else {
-				let sorted = scanlineIntersection[i].sort((a, b) => a.x - b.x);
-				if (sorted.length > 10) {
-					//   debugger;
-				}
-				findPairs(sorted).map((pair) => {
-					//          console.log(JSON.stringify(sorted));
-					drawLineBresenham(
-						pair.minX,
-						i,
-						0,
-						pair.maxX,
-						i,
-						0,
-						data.getColorByName("red")
-					);
-				});
-			}
+			// if (scanlineIntersection[i].length === 2) {
+			// 	let sorted = scanlineIntersection[i].sort((a, b) => a.x - b.x);
+			// 	let minX = sorted[0].x;
+			// 	let maxX = sorted[sorted.length - 1].x;
+			// 	drawLineBresenham(minX, i, 0, maxX, i, 0, data.getColorByName("red"));
+			// } else {
+			// 	let sorted = scanlineIntersection[i].sort((a, b) => a.x - b.x);
+			// 	if (sorted.length > 10) {
+			// 		//   debugger;
+			// 	}
+			// 	findPairs(sorted).map((pair) => {
+			// 		//          console.log(JSON.stringify(sorted));
+			// 		drawLineBresenham(
+			// 			pair.minX,
+			// 			i,
+			// 			0,
+			// 			pair.maxX,
+			// 			i,
+			// 			0,
+			// 			data.getColorByName("red")
+			// 		);
+			// 	});
+			// }
+
+			let sorted = scanlineIntersection[i].sort((a, b) => a.x - b.x);
+			// if (sorted.length > 10) debugger;
+			 
+			findPairs(sorted).map((pair) => {
+				// console.log(JSON.stringify(sorted));
+				drawLineBresenham(
+					pair.minX,
+					i,
+					pair.startZ,
+					pair.maxX,
+					i,
+					pair.endZ,
+					color,
+					true
+				);
+			});
 		}
 
 		function findPairs(arr) {
-			let res = [];
+			if (arr.length > 4) debugger;
+			
+			const res = [];
 
-			// debugger;
-			if (arr.length > 4) {
-			}
 			for (let i = 0; i < arr.length;) {
 				let startX = arr[i].x;
+				let startZ = arr[i].z;
 				let currX = startX;
 				let offset = 0;
 				if (arr[i + 1].x != currX + 1) {
@@ -533,12 +555,17 @@ function(exports, shader, framebuffer, data) {
 						offset += 1;
 					}
 				}
+
 				res.push({
 					minX: startX,
 					maxX: arr[i + offset].x,
+					startZ: startZ,
+					endZ: arr[i + offset].z,
 				});
+
 				i += offset + 1;
 			}
+
 			return res;
 		}
 
