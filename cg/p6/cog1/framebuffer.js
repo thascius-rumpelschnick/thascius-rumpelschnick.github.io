@@ -43,7 +43,7 @@ define(["exports", "scene"], function(exports, scene) {
 	var resetZBuffer;
 
 	// For z buffer. Camera look in -z direction.
-	var maxDistance = Number.MIN_SAFE_INTEGER;
+	var maxDistance = -10000;
 	// Background color rgb
 	var bgColor = [255, 255, 255, 255];
 	// "white";
@@ -130,26 +130,33 @@ define(["exports", "scene"], function(exports, scene) {
 
 		// Z-Buffer pixel starts a frame as undefined.
 		// The first access on a pixel does not need a test.
-		if (zBuf[indexZBuf] == undefined) {
-			zBuf[indexZBuf] = z;
-			return true;
-		}
+
+		// if (zBuf[indexZBuf] == undefined) {
+		// 	zBuf[indexZBuf] = z;
+		// 	return true;
+		// }
 
 		// On z-buffer fights color black should win to emphasize debug edges.
 		// Use some small epsilon to determine z-buffer fights
 		// in favor of the the polygon processed first or last (depending on sign).
 		// Epsilon depends on the z-range of the scene.
-		if (zBuf[indexZBuf] < (z + 1000)) {
-			zBuf[indexZBuf] = z;
-			return true;
-		}
+
+		// if (zBuf[indexZBuf] < (z + 1000)) {
+		// 	zBuf[indexZBuf] = z;
+		// 	return true;
+		// }
 
 		// Guess some decent epsilon (which may be >1 despite the name).
 
 		// The camera is in the origin looking in negative z-direction.
+		if (zBuf[indexZBuf] > z) {
+			return false;
+		  }
+		  zBuf[indexZBuf] = z;
+		  
 		// END exercise Z-Buffer
 
-		return false;
+		return true;
 	}
 
 	/**
