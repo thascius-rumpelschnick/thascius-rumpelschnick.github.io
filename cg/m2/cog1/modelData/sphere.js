@@ -29,7 +29,7 @@
  * @module sphere
  */
 
-define(["exports", "data", "glMatrix"], function(exports, data) {
+define(["exports", "data", "glMatrix"], function (exports, data) {
 	"use strict";
 
 	/**
@@ -40,25 +40,25 @@ define(["exports", "data", "glMatrix"], function(exports, data) {
 	 * @parameter recursionDepth
 	 * @parameter color [-1 for many colors]
 	 */
-	exports.create = function(parameter) {
-				
-		if(parameter) {
+	exports.create = function (parameter) {
+
+		if (parameter) {
 			var scale = parameter.scale;
 			var recursionDepth = parameter.recursionDepth;
 			var color = parameter.color;
 			var textureURL = parameter.textureURL;
 		}
 		// Set default values if parameter is undefined.
-		if(scale == undefined) {
+		if (scale == undefined) {
 			scale = 250;
 		}
-		if(recursionDepth == undefined) {
+		if (recursionDepth == undefined) {
 			recursionDepth = 3;
 		}
-		if(color == undefined) {
+		if (color == undefined) {
 			color = 9;
 		}
-		if(textureURL == undefined) {
+		if (textureURL == undefined) {
 			textureURL = "";
 		}
 
@@ -68,14 +68,30 @@ define(["exports", "data", "glMatrix"], function(exports, data) {
 		// BEGIN exercise Sphere
 
 		// Starting with octahedron vertices
-
+		instance.vertices = [
+			[0, 1, 0],
+			[1, 0, 0],
+			[0, 0, -1],
+			[-1, 0, 0],
+			[0, 0, 1],
+			[0, -1, 0]
+		];
+		instance.polygonVertices = [
+			[0, 4, 1],
+			[0, 1, 2],
+			[0, 2, 3],
+			[0, 3, 4],
+			[5, 4, 1],
+			[5, 1, 2],
+			[5, 2, 3],
+			[5, 3, 4],
+		];
 		// octahedron triangles
 
+		//instance = devide_all(instance, 1);
 		devide_all.call(instance, recursionDepth);
 
 		// END exercise Sphere
-		
-		devide_all.call(instance, recursionDepth);
 
 		generateTextureCoordinates.call(instance);
 
@@ -109,33 +125,33 @@ define(["exports", "data", "glMatrix"], function(exports, data) {
 		this.polygonTextureCoord = [];
 
 
-			// Loop over vertices/edges in polygon.
+		// Loop over vertices/edges in polygon.
 
-				// Shorthands for the current vertex.
-
-
-				// Calculate longitude (east-west position) phi (u-coordinate).
-				// arctangent (of here z/x), representing the angle theta between the positive X axis, and the point.
-				// Scale phi to uv range [0,1].
+		// Shorthands for the current vertex.
 
 
-				// Calculate latitude (north-south position) theta (v-coordinate) from y component of vertex.
-				// Scale theta to uv range [0,1].
+		// Calculate longitude (east-west position) phi (u-coordinate).
+		// arctangent (of here z/x), representing the angle theta between the positive X axis, and the point.
+		// Scale phi to uv range [0,1].
 
 
-				// Store new uv coordinate in new uv-vector.
-				//console.log("phi:" + (~~(phi * 100)) + "  theta:" + (~~(theta * 100)) + " x:" + (~~(x * 100)) + " z:" + (~~(z * 100)));
-				
+		// Calculate latitude (north-south position) theta (v-coordinate) from y component of vertex.
+		// Scale theta to uv range [0,1].
+
+
+		// Store new uv coordinate in new uv-vector.
+		//console.log("phi:" + (~~(phi * 100)) + "  theta:" + (~~(theta * 100)) + " x:" + (~~(x * 100)) + " z:" + (~~(z * 100)));
+
 
 		// Problem with phi/u: phi=360 and phi=0 are the same point in 3D and also on a tiled texture.
-		// But for faces it is a difference if uv-range is 350¡-360¡ [.9-1]or 350¡-0¡ [.9-0].
+		// But for faces it is a difference if uv-range is 350ï¿½-360ï¿½ [.9-1]or 350ï¿½-0ï¿½ [.9-0].
 		// Thus, insert a check/hack (assuming faces cover only a small part of the texture):
 
-			// Check if u-range should be low or high (left or right in texture),
-			// by summing up u values (ignoring u=0 values).
+		// Check if u-range should be low or high (left or right in texture),
+		// by summing up u values (ignoring u=0 values).
 
-			// Check and correct u values if 0;
-		
+		// Check and correct u values if 0;
+
 		// END exercise Sphere-Earth-Texture
 	}
 
@@ -144,45 +160,111 @@ define(["exports", "data", "glMatrix"], function(exports, data) {
 	/**
 	 * Recursively divide all triangles.
 	 */
+	function devide_all(instance, nbRecusions) {
+		// nbRecusions is not set from initial call.
+		if (nbRecusions == undefined) {
+			nbRecusions = 0;
+		}
+
+		do {
+			var res = divvy_up(instance.vertices, instance.polygonVertices);
+
+			instance.vertices = res[0];
+			instance.polygonVertices = res[1];
+		} while (--nbRecusions > 0);
+
+		return instance;
+	}
+	/**
+	 * Recursively divide all triangles.
+	 */
 	function devide_all(recursionDepth, nbRecusions) {
 		// nbRecusions is not set from initial call.
-		if(nbRecusions == undefined) {
+		if (nbRecusions == undefined) {
 			nbRecusions = 0;
 		}
 		// Stop criterion.
-
+		if (nbRecusions == recursionDepth) {
+			return;
+		}
 		//console.log("nbRecusions: "+nbRecusions);
 		// Assemble divided polygons in an new array.
+		var newPolygon = [];
+		for (var v = 0; v < this.polygonVertices.length; v++) {
 
-			// Indices of the last three new vertices.
+			var p0 = this.polygonVertices[v][0];
+			var p1 = this.polygonVertices[v][1];
+			var p2 = this.polygonVertices[v][2];
 
-				// Calculate new vertex in the middle of edge.
+			//console.log("Points: " +p0+ "|" +p1+  "|" +p2);
 
-				// Check if the new vertex exists already.
-				// This happens because edges always belong to two triangles.
+			//get vectors
+			var v0 = this.vertices[p0];
+			var v1 = this.vertices[p1];
+			var v2 = this.vertices[p2];
 
-					// Remember index of new vertex.
+			//create new vectors
+			var a = vecAdd(v0, v2);
+			var b = vecAdd(v0, v1);
+			var c = vecAdd(v1, v2);
 
-					//console.log("Calculate new vertex "+v+"->"+newIndex[v]+" : "+vertices[p[v]]+" + "+ vertices[p[next]]+" = "+ newVertex);
+			a = vecMul(a, 0.5);
+			b = vecMul(b, 0.5);
+			c = vecMul(c, 0.5);
 
-					// Use the existing vertex for the new polygon.
+			// normalize
+			a = vecNormalize(a);
+			b = vecNormalize(b);
+			c = vecNormalize(c);
 
-					//console.log("New vertex exists "+v+"->"+newIndex[v]+" : "+this.vertices[p[v]]+" + "+ this.vertices[p[next]]+" = "+ newVertex);
+			//get new indices for vertices
+			var indexA = this.vertices.length;
+			this.vertices.push(a);
+			var indexB = this.vertices.length;
+			this.vertices.push(b);
+			var indexC = this.vertices.length;
+			this.vertices.push(c);
 
-			// Assemble new polygons.
-			// Assure mathematical positive order to keep normals pointing outwards.
-			// Triangle in the center.
-
-			// Triangle in the corners.
-
-				//console.log("Assemble new polygons "+v+" : "+p[v]+" , "+ newIndex[nextButOne]+" , "+ newIndex[v]);
-
+			// construct new Polygon (triangle)
+			newPolygon.push([p0, indexB, indexA]);
+			newPolygon.push([indexB, p1, indexC]);
+			newPolygon.push([indexA, indexB, indexC]);
+			newPolygon.push([indexA, indexC, p2]);
+		}
 		// Swap result.
-
+		this.polygonVertices = newPolygon;
 		// Recursion.
+		devide_all.call(this, recursionDepth, nbRecusions + 1);
 
+		// END exercise Sphere
 	}
-	
+
+	const vecNormalize = (v) => {
+		if (v.length != 3) {
+			throw new Error("Vector of length 3 expected");
+		}
+		var vectorLength = Math.sqrt(v[0] * v[0] + v[1] * v[1] + v[2] * v[2]);
+		return [v[0] / vectorLength, v[1] / vectorLength, v[2] / vectorLength];
+	};
+
+	const vecAdd = (v1, v2) => {
+		if (v1.length != v2.length) {
+			throw new Error("Vectors must be of same length");
+		}
+		var tmp = [];
+		v1.forEach((element, index) => {
+			tmp.push(element + v2[index]);
+		});
+		return tmp;
+	};
+	const vecMul = (vec, num) => {
+		var tmp = [];
+		vec.forEach((element) => {
+			tmp.push(element * num);
+		});
+		return tmp;
+	};
+
 	// END exercise Sphere
 
 });
