@@ -11,8 +11,8 @@
  * @namespace cog1.shader
  * @module shader
  */
-define(["exports"], function(exports) {
-    "use strict";
+define(["exports"], function (exports) {
+	"use strict";
 
 	// List of shading function names.
 	// Shading function have to exported.
@@ -121,8 +121,8 @@ define(["exports"], function(exports) {
 		//console.log("setLights sumOfAllLightTypesIntensity: "+sumOfAllLightTypesIntensity);
 
 		// Check change in position.
-		if(pointPos) {
-			for(var i = 0; i < pointLightPosition.length; i++) {
+		if (pointPos) {
+			for (var i = 0; i < pointLightPosition.length; i++) {
 				pointLightPosition[i] = pointPos[i] != undefined ? pointPos[i] : pointLightPosition[i];
 			};
 		}
@@ -134,7 +134,7 @@ define(["exports"], function(exports) {
 	 * the position of the point light into consideration.
 	 */
 	function usesLightLocation() {
-		if(shadingFunctionName == "none") {
+		if (shadingFunctionName == "none") {
 			return false;
 		}
 		return true;
@@ -199,7 +199,7 @@ define(["exports"], function(exports) {
 	 * @parameter polygonIndex is the index of the polygon to process.
 	 */
 	function setPolygon(_polygonIndex) {
-		if(model == null) {
+		if (model == null) {
 			console.error("Error in setPolygon: no model set.");
 			return false;
 		}
@@ -219,25 +219,44 @@ define(["exports"], function(exports) {
 	 * @returns an object with intensities for diffuse, ambientDiffuse, specular and total.
 	 */
 	function calcLightIntensity(point, normal) {
-
-	
 		// Intensity of diffuse light.
 		var diffuse = 0;
 		// Intensity of ambient plus diffuse light.
 		var ambientDiffuse = 0;
 		// Direction vector from light to point on surface.
 		var lightDirection = [];
+		var specular = 0;
 
 		// BEGIN exercise Flat-Shading
 
 		// Calculate diffuse light.
 		// Calculate vector from light to point and normalize on one step.
-
+		var l = [];
+		vec3.subtract(pointLightPosition, point, l);
+		vec3.normalize(l);
 		// Cut light from the wrong direction that leads to negative light intensities.
-
+		if (l[2] < 0) {
+			return {
+				diffuse: 0,
+				ambientDiffuse: 0,
+				specular: 0,
+				total: 0
+			};
+		}
 		// Add ambient and diffuse Lambert intensity term.
-
+		var cosAlpha = vec3.dot(normal, l);
+		diffuse = Math.max(0, pointLightIntensity * cosAlpha);
+		ambientDiffuse = ambientLightIntensity + diffuse;
 		// Calculate reflection vector of light direction in respect to normal.
+
+		var cosTheta = vec3.dot(normal, l);
+		if (cosTheta >= 0) {
+			var r = [];
+			vec3.scale(normal, 2 * cosTheta, r);
+			vec3.subtract(r, l);
+			var cosGamma = vec3.dot(r, [0, 0, 1]);
+			specular = pointLightIntensity * cosTheta + specularLightIntensity * Math.pow(Math.max(0, cosGamma), specularLightExponent);
+		}
 
 		// Specular light in eye direction ,which is +z in orthogonal projection,
 		// Otherwise it is the normalized negative eye/camera vector,
@@ -258,10 +277,10 @@ define(["exports"], function(exports) {
 
 		// Return object with intensities.
 		return {
-			diffuse : diffuse,
-			ambientDiffuse : ambientDiffuse,
-			specular : specular,
-			total : ambientDiffuse + specular
+			diffuse: diffuse,
+			ambientDiffuse: ambientDiffuse,
+			specular: specular,
+			total: ambientDiffuse + specular
 		};
 	}
 
@@ -305,7 +324,7 @@ define(["exports"], function(exports) {
 	 * See function none.
 	 */
 	function flat(color) {
-
+		vec3.scale(color.rgba, polygonLightIntensity, color.rgbaShaded);
 	}
 
 	/**
@@ -313,10 +332,17 @@ define(["exports"], function(exports) {
 	 */
 	function flatInit() {
 		// Calculate the center point of the polygon.
+		var polygonCenter = [0, 0, 0];
+		for (var i = 0; i < polygon.length; i++) {
+			vec3.add(polygonCenter, vertices[polygon[i]]);
+		}
+		vec3.scale(polygonCenter, 1 / polygon.length);
 
 		// Calculate light intensity at polygon center.
-		// Use ambient and diffuse light.
+		var intensity = calcLightIntensity(polygonCenter, polygonNormals[polygonIndex]);
 
+		// Use ambient and diffuse light.
+		polygonLightIntensity = intensity["ambientDiffuse"];
 		// Use ambient, diffuse and specular light.
 		//var intensity = calcLightIntensity(polygonCenter, polygonNormal);
 		//polygonLightIntensity = intensity["ambientDiffuse"] +  255 * intensity["specular"];
@@ -338,7 +364,7 @@ define(["exports"], function(exports) {
 	}
 
 	// BEGIN exercise Gouraud-Shading
-	
+
 	/**
 	 * See function none.
 	 *
@@ -356,9 +382,9 @@ define(["exports"], function(exports) {
 	 */
 	function gouraudInit() {
 
-			// Calculate shading.
-			// Used the vertexIndex as index, to lookup intensity in shading function.
-			// Use ambient, diffuse and specular light.
+		// Calculate shading.
+		// Used the vertexIndex as index, to lookup intensity in shading function.
+		// Use ambient, diffuse and specular light.
 
 	}
 
@@ -413,9 +439,10 @@ define(["exports"], function(exports) {
 
 
 		// Calculate shading.
+		var intensity = calcLightIntensity(scanlineInterpolationVertex, scanlineInterpolationNormal);
 
 		// Add white specular light.
-
+		vec3.scale(color.rgba, intensity["total"], color.rgbaShaded);
 	}
 
 	/**
@@ -440,28 +467,40 @@ define(["exports"], function(exports) {
 		// Interpolation of vertex and normals.
 
 		// i is index of start and end point (start and end edge) on scan-line.
-
+		for (var i = 0; i < 2; i++) {
+			scanlineInterpolationNormals[i] = [];
+			scanlineInterpolationVertices[i] = [];
 			// j is index of start and end point of edge involved in scanline.
-
-				// Normal interpolation.
-
-				// Vertex interpolation.
-
+			var j = i * 2;
+			// Normal interpolation.
+			var normalDelta = [];
+			vec3.subtract(vertexNormals[interpolationVertexIndices[j + 1]], vertexNormals[interpolationVertexIndices[j]], normalDelta);
+			vec3.scale(normalDelta, interpolationWeights[j + 1]);
+			vec3.add(vertexNormals[interpolationVertexIndices[j]], normalDelta, scanlineInterpolationNormals[i]);
+			// Vertex interpolation.
+			var vertexDelta = [];
+			vec3.subtract(vertices[interpolationVertexIndices[j + 1]], vertices[interpolationVertexIndices[j]], vertexDelta);
+			vec3.scale(vertexDelta, interpolationWeights[j + 1]);
+			vec3.add(vertices[interpolationVertexIndices[j]], vertexDelta, scanlineInterpolationVertices[i]);
 			// Do not normalize the averaged normals twice,
 			// thus not on edge an on scanline, normalize only
 			// once after second interpolation on scanline.
 			//vec3.normalize(scanlineInterpolationNormals[i]);
-
+		}
 
 		// Calculate delta for vertex interpolation.
+		vec3.subtract(scanlineInterpolationVertices[1], scanlineInterpolationVertices[0], scanlineInterpolationVertexDelta);
+		vec3.scale(scanlineInterpolationVertexDelta, 1 / deltaX);
 
 		// Initialize start vertex for interpolation, as a reference.
-
+		scanlineInterpolationVertex = scanlineInterpolationVertices[0];
 
 		// Calculate delta for normal interpolation.
+		vec3.subtract(scanlineInterpolationNormals[1], scanlineInterpolationNormals[0], scanlineInterpolationNormalDelta);
+		vec3.scale(scanlineInterpolationNormalDelta, 1 / deltaX);
 
 		// Initialize start vertex for interpolation, as a reference.
-
+		scanlineInterpolationNormal = scanlineInterpolationNormals[0];
 	}
 
 	/**
@@ -471,9 +510,10 @@ define(["exports"], function(exports) {
 	 */
 	function phongInterpolationStepOnScanline() {
 		// Interpolation of current vertex for next step.
-
+		vec3.add(scanlineInterpolationVertex, scanlineInterpolationVertexDelta);
 		// Interpolation of current normal for next step.
-
+		vec3.add(scanlineInterpolationNormal, scanlineInterpolationNormalDelta);
+		vec3.normalize(scanlineInterpolationNormal);
 	}
 
 	// END exercise Phong-Shading
@@ -509,11 +549,11 @@ define(["exports"], function(exports) {
 	 * The check may also be skipped for speed.
 	 */
 	function isEverytingSet() {
-		if(model == null) {
+		if (model == null) {
 			console.error("Error in shader: no model set.");
 			return false;
 		}
-		if(polygonIndex == undefined) {
+		if (polygonIndex == undefined) {
 			console.error("Error in shader: no polygonIndex set.");
 			return false;
 		}

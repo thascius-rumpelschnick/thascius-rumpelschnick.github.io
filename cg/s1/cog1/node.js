@@ -262,7 +262,14 @@ define(["exports", "shader"], function(exports, shader) {
 			// BEGIN exercise Shear
 			// Include shearing.
 			// Modify the matrix this.localShear (see mat4.translate for matrix data structure).
-
+			// mat4.shear(this.localShear, this.transformation.shear);
+			this.localShear[1] = this.transformation.shear[1];
+			this.localShear[2] = this.transformation.shear[2];
+			this.localShear[4] = this.transformation.shear[0];
+			this.localShear[6] = this.transformation.shear[2];
+			this.localShear[8] = this.transformation.shear[0];
+			this.localShear[9] = this.transformation.shear[1];
+			mat4.multiply(this.localModelview, this.localShear);
 			// END exercise Shear
 
 			// Locally we are up to date, but we have to adjust world MV.
@@ -345,7 +352,7 @@ define(["exports", "shader"], function(exports, shader) {
 	 */
 	function shear(vec, setTo) {
 		// BEGIN exercise Shear
-
+		this.transform(this.transformation.shear, vec, setTo);
 		// END exercise Shear
 	}
 
