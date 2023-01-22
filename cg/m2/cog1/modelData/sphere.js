@@ -196,8 +196,6 @@ define(["exports", "data", "glMatrix"], function (exports, data) {
 			var p1 = this.polygonVertices[v][1];
 			var p2 = this.polygonVertices[v][2];
 
-			//console.log("Points: " +p0+ "|" +p1+  "|" +p2);
-
 			//get vectors
 			var v0 = this.vertices[p0];
 			var v1 = this.vertices[p1];
