@@ -88,8 +88,7 @@ define(["exports", "data", "glMatrix"], function (exports, data) {
 		];
 		// octahedron triangles
 
-		//instance = devide_all(instance, 1);
-		devide_all.call(instance, recursionDepth);
+		divide_all.call(instance, recursionDepth);
 
 		// END exercise Sphere
 
@@ -157,28 +156,10 @@ define(["exports", "data", "glMatrix"], function (exports, data) {
 
 	// BEGIN exercise Sphere
 
-	/**
+	 /**
 	 * Recursively divide all triangles.
 	 */
-	function devide_all(instance, nbRecusions) {
-		// nbRecusions is not set from initial call.
-		if (nbRecusions == undefined) {
-			nbRecusions = 0;
-		}
-
-		do {
-			var res = divvy_up(instance.vertices, instance.polygonVertices);
-
-			instance.vertices = res[0];
-			instance.polygonVertices = res[1];
-		} while (--nbRecusions > 0);
-
-		return instance;
-	}
-	/**
-	 * Recursively divide all triangles.
-	 */
-	function devide_all(recursionDepth, nbRecusions) {
+	function divide_all(recursionDepth, nbRecusions) {
 		// nbRecusions is not set from initial call.
 		if (nbRecusions == undefined) {
 			nbRecusions = 0;
@@ -232,7 +213,7 @@ define(["exports", "data", "glMatrix"], function (exports, data) {
 		// Swap result.
 		this.polygonVertices = newPolygon;
 		// Recursion.
-		devide_all.call(this, recursionDepth, nbRecusions + 1);
+		divide_all.call(this, recursionDepth, nbRecusions + 1);
 
 		// END exercise Sphere
 	}
