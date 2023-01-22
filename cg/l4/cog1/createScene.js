@@ -16,21 +16,10 @@ define(["exports", "scenegraph", "animation"], //
 		 *
 		 */
 		function init() {
-			// BEGIN exercise Scenegraph
-
-			// Set parent-child relationships for scene-graph nodes.
-			const sun = scenegraph.createNodeWithModel("sun", "sphere", { recursionDepth: 2 }, null, true);
-			animation.assign(sun, "rotate", { rotationSpeed: [0, 0.01, 0] });
-
-			const earth = scenegraph.createNodeWithModel("earth", "sphere", { recursionDepth: 2, scale: 100 }, sun);
-			earth.translate([1000, 0, 0]);
-			animation.assign(earth, "rotate", { rotationSpeed: [0, 0.03, 0] });
-
-			const moon = scenegraph.createNodeWithModel("moon", "sphere", { recursionDepth: 2, scale: 50 }, earth);
-			moon.translate([250, 0, 0]);
-			animation.assign(moon, "rotate", { rotationSpeed: [0, 0.01, 0] });
-
-			// END exercise Scenegraph		
+			var cube = scenegraph.createNodeWithModel("cube", "cube", { scale: 180 });
+			cube.rotateTo([0.5, 0.3, 0]);
+			// scenegraph.createPointLightNode("light", "diamond");
+			scenegraph.setLights(0.5, 0.6, [220, 380, 300], 4.0, 10);
 		}
 
 		// Public API.
