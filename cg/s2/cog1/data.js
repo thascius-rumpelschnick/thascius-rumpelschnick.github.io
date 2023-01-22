@@ -52,7 +52,6 @@ define(["exports", "data", "glMatrix"], function (data, exports) {
 		{ yellow: [255, 255, 0, 255] },
 		//
 		{ black: [0, 0, 0, 255] },
-		{ brown: [139, 69, 19, 255] },
 		{ grey: [128, 128, 128, 255] },
 		{ gold: [83, 75, 44, 255] },
 		{ bluegrey: [64, 64, 128, 255] },

@@ -23,11 +23,11 @@ define(["exports", "scenegraph", "animation"], //
 			animation.assign(sun, "rotate", { rotationSpeed: [0, 0.01, 0] });
 
 			const earth = scenegraph.createNodeWithModel("earth", "sphere", { recursionDepth: 2, scale: 100 }, sun);
-			earth.translate([1000, 0, 0]);
+			earth.translate([800, 0, 0]);
 			animation.assign(earth, "rotate", { rotationSpeed: [0, 0.03, 0] });
 
 			const moon = scenegraph.createNodeWithModel("moon", "sphere", { recursionDepth: 2, scale: 50 }, earth);
-			moon.translate([250, 0, 0]);
+			moon.translate([300, 0, 0]);
 			animation.assign(moon, "rotate", { rotationSpeed: [0, 0.01, 0] });
 
 			// END exercise Scenegraph		
