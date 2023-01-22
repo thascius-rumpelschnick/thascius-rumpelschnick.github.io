@@ -13,7 +13,7 @@ function(exports, dojo, domStyle, app, scenegraph, createScene, animation, raste
 	// Fill or stroke polygon.
 	var fill = false;
 	// Display normals for debug.
-	var displayNormals = false;
+	var displayNormals = true;
 	var defaultNormalLength = 50;
 	// Display edges together with normals as default.
 	var displayEdges = false;
