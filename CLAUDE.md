@@ -42,8 +42,8 @@ reasonable assumption is necessary, state it explicitly.
 - Use **pnpm** (pinned via `packageManager` in `package.json`). `npm` and `npx` are not on PATH.
 - No `npx`: launch one-off CLIs and MCP servers with `pnpm dlx`. Project MCP servers are defined in `.mcp.json`.
 - Run `pnpm install` before any script.
-- pnpm settings live in `pnpm-workspace.yaml`, not in `package.json`. pnpm 12 fails an install when a dependency has an unreviewed postinstall script (`strictDepBuilds` defaults to on), so a new dependency with a build script needs an `allowBuilds` verdict there. `unrs-resolver` is deliberately `false`; its script only installs a WASM fallback that the native bindings make unnecessary.
-- Stack: Next.js 16 (App Router, Turbopack), React 19, TypeScript 6. The app was scaffolded by hand from the Next.js manual-installation guide, so there is no Tailwind and no create-next-app boilerplate. Styling is CSS Modules per component plus `src/app/globals.css` (tokens, reset, base elements); Kumbh Sans loads through `next/font/local`; icons are inline SVG from `src/components/icons/Icon.tsx`. Routes live in `src/app/`; `@/*` resolves to `src/*`.
+- pnpm settings live in `pnpm-workspace.yaml`, not in `package.json`. pnpm 12 fails an install when a dependency has an unreviewed postinstall script (`strictDepBuilds` defaults to on), so a new dependency with a build script needs an `allowBuilds` verdict there. `unrs-resolver` is deliberately `false`; its script only installs a WASM fallback that the native bindings make unnecessary. `@parcel/watcher` (sass's optional watcher) is allowed; its script is a no-op without `npm_config_build_from_source`.
+- Stack: Next.js 16 (App Router, Turbopack), React 19, TypeScript 6. The app was scaffolded by hand from the Next.js manual-installation guide, so there is no Tailwind and no create-next-app boilerplate. Styling is SCSS Modules per component (`sass` dev dependency) plus `src/app/globals.scss` (tokens, reset, base elements) and shared mixins in `src/styles/_mixins.scss`, imported with a relative `@use`; Kumbh Sans loads through `next/font/local`; icons are inline SVG from `src/components/icons/Icon.tsx`. Routes live in `src/app/`; `@/*` resolves to `src/*`.
 - `typescript` is an npm alias for `@typescript/typescript6`. TypeScript 7 is the native compiler and ships no JavaScript API, so typescript-eslint, and with it `eslint-config-next`, refuses to load against it. Microsoft documents the alias as the bridge until tools support the TS 7.1+ API. Do not bump `typescript` to 7 until `pnpm lint` works with it.
 - ESLint is pinned to major 9. `eslint-config-next` itself accepts 10, but the react, import and jsx-a11y plugins it pulls in do not declare support for it yet, and create-next-app pins `^9` too. npm marks 9.x as deprecated; move to 10 once those plugins declare support for it.
 - Scripts:
@@ -58,7 +58,7 @@ reasonable assumption is necessary, state it explicitly.
 
 ## Repo layout
 
-- `src/app/` is the App Router tree (`layout.tsx`, `page.tsx`, `globals.css`, `fonts/`). `src/components/<name>/` holds one folder per component (`Name.tsx`, `Name.module.css`, colocated images). `public/` holds files served as-is from the domain root.
+- `src/app/` is the App Router tree (`layout.tsx`, `page.tsx`, `globals.scss`, `fonts/`). `src/components/<name>/` holds one folder per component (`Name.tsx`, `Name.module.scss`, colocated images). `src/styles/` holds shared Sass partials. `public/` holds files served as-is from the domain root.
 - `legacy/` is a **read-only content source**. `legacy/index.html` (CV site) and `legacy/ti/` (FSM / Turing-machine visualizer) are what the new app should reproduce. Never edit anything under `legacy/`; use `/port-legacy <section>` to bring content over.
 
 ## GitHub Pages

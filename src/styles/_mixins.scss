@@ -1,0 +1,12 @@
+// Breakpoints from legacy/styles/style.css.
+@mixin tablet {
+  @media only screen and (max-width: 768px) {
+    @content;
+  }
+}
+
+@mixin phone {
+  @media only screen and (max-width: 425px) {
+    @content;
+  }
+}

@@ -3,5 +3,9 @@
 # script needs an explicit verdict. unrs-resolver's script only installs a
 # WASM fallback when no native binding matches the platform; the darwin and
 # linux bindings ship as optional dependencies, so the script stays blocked.
+# @parcel/watcher (optional dependency of sass) ships prebuilt binaries too;
+# its install script is a no-op unless npm_config_build_from_source is set,
+# so allowing it changes nothing.
 allowBuilds:
+  '@parcel/watcher': true
   unrs-resolver: false

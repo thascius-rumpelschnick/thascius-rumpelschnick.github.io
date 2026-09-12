@@ -1,11 +1,11 @@
 # Architecture
 
-Version: 0.2
+Version: 0.3
 Date: 2026-09-12
 
 ## Stack
 
-Next.js 16 (App Router, Turbopack) with React 19 and TypeScript, built as a **static export** and served by GitHub Pages. pnpm 12 is the only package manager. The scaffold was created by hand from the Next.js manual-installation guide, so there is no Tailwind, no global stylesheet and no create-next-app boilerplate; those remain open choices below.
+Next.js 16 (App Router, Turbopack) with React 19 and TypeScript, built as a **static export** and served by GitHub Pages. pnpm 12 is the only package manager. The scaffold was created by hand from the Next.js manual-installation guide, so there is no Tailwind and no create-next-app boilerplate. Styles are SCSS Modules compiled by `sass` (decisions 10 and 13).
 
 ## Delivery
 
@@ -16,7 +16,7 @@ Next.js 16 (App Router, Turbopack) with React 19 and TypeScript, built as a **st
 ## Source layout
 
 - `src/app/` holds the App Router tree (`layout.tsx`, `page.tsx`); `@/*` resolves to `src/*`. `public/` holds files served as-is from the domain root.
-- `src/components/<name>/` holds one folder per component: `Name.tsx`, `Name.module.css` and the images it imports (decision 9). `src/app/globals.css` carries design tokens, the reset and base element styles; page chrome lives in `src/app/page.module.css` (decision 10).
+- `src/components/<name>/` holds one folder per component: `Name.tsx`, `Name.module.scss` and the images it imports (decision 9). `src/app/globals.scss` carries design tokens, the reset and base element styles; page chrome lives in `src/app/page.module.scss` (decision 10). Shared Sass mixins (the legacy breakpoints) live in `src/styles/_mixins.scss` and are pulled in with a relative `@use` (decision 13).
 - Icons are inline SVG rendered by `src/components/icons/Icon.tsx` from a name-to-path map (decision 11). Kumbh Sans is self-hosted through `next/font/local` from `src/app/fonts/` (decision 12).
 - `legacy/` is excluded from TypeScript and ESLint; it is content, not code.
 
@@ -36,6 +36,7 @@ Next.js 16 (App Router, Turbopack) with React 19 and TypeScript, built as a **st
 | 10 | CSS Modules per component plus a small global `globals.css` (tokens, minireset, body, headings, links); section ids stay plain attributes and styling hangs off a module class | Chosen by the owner on 2026-09-12. Legacy selectors port almost verbatim (`#about` becomes `.about`), nothing leaks between the CV page and the visualizer routes, and anchor ids keep working because a module would hash `#about` | One global stylesheet ported as-is (id selectors leak across routes, one file for every section), Tailwind (a redesign, out of scope) | A visual refresh replaces the legacy CSS |
 | 11 | Icons as inline SVG paths copied from the legacy Font Awesome 5.14 `svgs/` folder into `Icon.tsx` (CC BY 4.0 attribution kept in the file) | Chosen by the owner on 2026-09-12. Zero dependencies, a few hundred bytes per icon, and nothing to fetch on a static export | `@fortawesome/fontawesome-free` CSS (full webfonts for ~19 icons), `react-fontawesome` (four packages) | The icon count grows well past the legacy ~19 or an icon needs styling the map cannot express |
 | 12 | Kumbh Sans through `next/font/local` with the three legacy TTFs at weights 300/400/700; body weight 300 | Self-hosted, no layout shift, works with static export. Legacy declared `@font-face { font-weight: lighter }`, an invalid descriptor, so its Light face never registered; 300 is the evident intent | `@font-face` in `globals.css` with files in `public/` | Never, unless the font changes |
+| 13 | SCSS Modules (`*.module.scss`, `globals.scss`) compiled by the `sass` dev dependency; shared mixins in `src/styles/_mixins.scss`, imported by relative `@use` | Chosen by the owner on 2026-09-12. Next 16 supports Sass natively with the same module scoping rules; nesting mirrors the legacy selector structure and mixins remove the media queries and the button rule that legacy repeats across sections. Plain CSS is valid SCSS, so nothing was rewritten. `@parcel/watcher`, sass's optional watcher, has an install script that is a no-op without `npm_config_build_from_source`; it is allowed in `pnpm-workspace.yaml` | Plain CSS Modules (native nesting via Lightning CSS, but no mixins), `sass-embedded` (native binary, faster, more platform packages), `sassOptions.loadPaths` instead of relative `@use` (one more config knob) | Turbopack's Sass support changes, or the mixin count stays at two |
 
 ## Open decisions
 

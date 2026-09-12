@@ -1,4 +1,4 @@
-import styles from "./Icon.module.css"
+import styles from "./Icon.module.scss"
 
 /*
  * Paths from Font Awesome Free 5.14.0 (legacy/styles/fonts/fontawesome/svgs),

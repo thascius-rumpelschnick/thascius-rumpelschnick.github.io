@@ -1,7 +1,7 @@
 import Image from "next/image"
 import Icon from "@/components/icons/Icon"
 import me from "./me.jpeg"
-import styles from "./About.module.css"
+import styles from "./About.module.scss"
 
 export default function About() {
   return (

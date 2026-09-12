@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import About from "@/components/about/About"
-import styles from "./page.module.css"
+import styles from "./page.module.scss"
 
 export const metadata: Metadata = {
   title: "Florian Zapf - Fullstack Software Engineer",
