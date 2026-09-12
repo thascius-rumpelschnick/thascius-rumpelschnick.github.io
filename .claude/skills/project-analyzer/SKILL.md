@@ -4,8 +4,8 @@ description: Use this skill proactively at the start of any new conversation in 
 model: fable
 effort: xhigh
 metadata:
-   author: <author>
-   version: "1.0"
+  author: Florian Zapf
+  version: "1.0"
 ---
 
 # Project Analyzer

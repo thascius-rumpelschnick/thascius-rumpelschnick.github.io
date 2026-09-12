@@ -9,6 +9,7 @@ The root app is being re-scaffolded. The Vite scaffold still in `HEAD` was delet
 ## Toolchain
 
 - Use **pnpm**. `npm` and `npx` are not on PATH.
+- No `npx`: launch one-off CLIs and MCP servers with `pnpm dlx`. Project MCP servers are defined in `.mcp.json`.
 - Run `pnpm install` before any script. Never run it before `package.json` exists: pnpm silently creates a bare manifest when none is present.
 - Scripts and their quirks: _fill in after scaffolding_.
 - There are no tests. Run `/verify` before declaring work done.

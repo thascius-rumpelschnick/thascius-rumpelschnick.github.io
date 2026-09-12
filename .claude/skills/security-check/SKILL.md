@@ -6,7 +6,7 @@ model: fable
 effort: xhigh
 disable-model-invocation: true
 metadata:
-  author: <author>
+  author: Florian Zapf
   version: "1.0"
 ---
 

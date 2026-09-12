@@ -5,7 +5,7 @@ model: fable
 effort: xhigh
 disable-model-invocation: true
 metadata:
-  author: <author>
+  author: Florian Zapf
   version: "1.0"
 ---
 
@@ -36,11 +36,10 @@ separating this mode from a generic chat.
 - **If those docs aren't present yet** (early in a branch, or before the `.ai/` set has been written),
   fall back to the best available design docs and the project's platform model. Say which source
   you're grounding in so the user knows. Never invent citations to docs that aren't there.
-- Skim the code relevant to the topic and cite specifics as `path/to/File.kt:line`. Concrete
+- Skim the code relevant to the topic and cite specifics as `path/to/File.tsx:line`. Concrete
   references keep the conversation honest and let the user follow your reasoning. If the code referenced
   in a doc doesn't exist yet, say so — "this is a planned concept, not built code" is a useful finding,
   not a failure.
-- **Never read `docs/development/`** — excluded by this repo's sandbox settings on purpose.
 - It's fine to say "let me look first" and take a turn to read before responding. A grounded reply one
   turn later beats a confident guess now.
 
@@ -80,12 +79,10 @@ These are habits, not a script. Each earns its place:
   wrong, but disagree.
 - **Hold one thread at a time.** A dialogue that forks into six open questions resolves none of them.
   Follow the live thread to a landing point before opening the next.
-- **Connect to *this* project's real constraints.** FitLog is local-first with no wire contracts to
-  version — the constraints that matter here are the ones in `.ai/project.md` "Key Constraints"
-  (offline-first, no cloud auth, per-`userId` data isolation) and the AGP-9-built-in-Kotlin /
-  KSP-only build rules in `.ai/architecture.md` "Build toolchain." This is also a **learning
-  project** (`.ai/learning.md`) — favor explaining tradeoffs and letting the user reach the
-  conclusion over handing down a finished answer.
+- **Connect to *this* project's real constraints.** This is a personal site published as static files
+  on GitHub Pages — no server, no runtime secrets, `legacy/` as the read-only content source, pnpm as
+  the only toolchain (see `CLAUDE.md`). Once `.ai/project.md` "Key Constraints" and
+  `.ai/architecture.md` are written, those take precedence.
 
 ## Capture the summary
 
@@ -127,7 +124,7 @@ Status: exploration   # not an authoritative spec
 <unresolved threads worth revisiting>
 
 ## Proposed next steps (the "plan")
-<concrete actions; flag any that should graduate into an OpenSpec change or an .ai/ doc update>
+<concrete actions; flag any that should graduate into an .ai/ doc update>
 ```
 
 Write the *substance*, not a transcript. A summary that just replays the chat turn-by-turn is noise —
@@ -139,12 +136,10 @@ version (`0.2-DIALOGUE`) rather than starting a fresh file, so the thinking accu
 This mode sits **upstream** of formal change management. It is where ideas get pressure-tested before
 they become commitments.
 
-- A summary can **graduate** into an OpenSpec proposal (`opsx:propose`) or an update to the
-  authoritative `.ai/` docs — the "Proposed next steps" section is where you flag that.
-- But this skill **ratifies nothing.** It doesn't edit `.ai/` specs, doesn't open OpenSpec changes, and
-  doesn't touch code. It produces understanding and an exploratory note; the user decides what graduates.
-- It complements `opsx:explore` — that skill explores a *specific change*; this one explores the
-  *architecture* more openly, with the durable summary as output.
+- A summary can **graduate** into an update to the authoritative `.ai/` docs — the "Proposed next
+  steps" section is where you flag that.
+- But this skill **ratifies nothing.** It doesn't edit `.ai/` specs and doesn't touch code. It produces
+  understanding and an exploratory note; the user decides what graduates.
 
 ## Anti-patterns
 
