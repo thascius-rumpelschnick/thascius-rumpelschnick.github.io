@@ -23,7 +23,7 @@
   --standard-margin: 1rem;
 }
 
-/* Reset: minireset.css v0.0.6 | MIT License | github.com/jgthms/minireset.css */
+/* Reset: minireset.css v0.0.7 | MIT License | github.com/jgthms/minireset.css */
 html,
 body,
 p,
@@ -67,8 +67,7 @@ ul {
 
 button,
 input,
-select,
-textarea {
+select {
   margin: 0;
 }
 
@@ -96,11 +95,6 @@ table {
 td,
 th {
   padding: 0;
-}
-
-td:not([align]),
-th:not([align]) {
-  text-align: left;
 }
 
 /* Base */
