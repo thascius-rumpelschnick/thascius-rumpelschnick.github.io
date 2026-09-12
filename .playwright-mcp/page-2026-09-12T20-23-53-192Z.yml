@@ -1,0 +1,27 @@
+- generic [active] [ref=e1]:
+  - navigation [ref=e2]:
+    - generic [ref=e3]:
+      - link "Thascius Rumpelschnick" [ref=e4] [cursor=pointer]:
+        - /url: https://github.com/thascius-rumpelschnick
+      - list [ref=e5]:
+        - listitem [ref=e6]:
+          - link "DEA" [ref=e7] [cursor=pointer]:
+            - /url: ./ti/fsm.html
+        - listitem [ref=e8]:
+          - link "TM" [ref=e9] [cursor=pointer]:
+            - /url: ./ti/tm.html
+        - listitem [ref=e10]:
+          - link "CG" [ref=e11] [cursor=pointer]:
+            - /url: ./cg/index.html
+      - list [ref=e12]:
+        - listitem [ref=e13]:
+          - link "DEA" [ref=e14] [cursor=pointer]:
+            - /url: ./ti/fsm.html
+        - listitem [ref=e15]:
+          - link "TM" [ref=e16] [cursor=pointer]:
+            - /url: ./ti/tm.html
+  - generic [ref=e18]:
+    - heading "Soon.." [level=1] [ref=e19]
+    - heading "Very soon.." [level=5] [ref=e21]
+    - link "I promise" [ref=e23] [cursor=pointer]:
+      - /url: https://www.youtube.com/watch?v=dQw4w9WgXcQ

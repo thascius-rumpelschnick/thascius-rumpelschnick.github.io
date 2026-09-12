@@ -1,0 +1,264 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - navigation [ref=e3]:
+      - generic [ref=e4]:
+        - link [ref=e5] [cursor=pointer]:
+          - /url: /
+          - img "Jampack" [ref=e6]
+          - img "Jampack" [ref=e7]
+        - generic [ref=e8]:
+          - link "UI Kits" [ref=e9] [cursor=pointer]:
+            - /url: "#ui-kits"
+          - link "SaaS Starter Kit" [ref=e10] [cursor=pointer]:
+            - /url: "#saas"
+          - link "Main Site ↗" [ref=e11] [cursor=pointer]:
+            - /url: https://www.hencework.com/?ref=jampack.hencework.com
+    - generic [ref=e13]:
+      - generic [ref=e14]: Jampack Ecosystem
+      - heading "Powerful UI Kits & SaaS Starters for ambitious developers" [level=1] [ref=e16]: Powerful UI Kits & SaaS Startersfor ambitious developers
+      - paragraph [ref=e17]: Carefully crafted developer products built for modern stacks — including Next.js SaaS starter kits, admin dashboards, UI systems, and production-ready app foundations.
+      - generic [ref=e18]:
+        - link "Explore Products" [ref=e19] [cursor=pointer]:
+          - /url: "#ui-kits"
+        - link "Documentation" [ref=e22] [cursor=pointer]:
+          - /url: https://jampack-doc.hencework.com/
+    - generic [ref=e27]:
+      - generic [ref=e28]:
+        - generic [ref=e29]: UI Kits & Admin Templates
+        - heading "Build with your favourite framework" [level=2] [ref=e30]: Build with yourfavourite framework
+        - paragraph [ref=e31]: Production-ready admin templates with 1000+ components, 10+ apps, multiple layouts and dark mode.
+      - generic [ref=e32]: React & Next.js
+      - generic [ref=e35]:
+        - article [ref=e36]:
+          - img "TanStack" [ref=e41]
+          - generic [ref=e42]:
+            - generic [ref=e43]: TanStack
+            - heading "Jampack TanStack" [level=3] [ref=e45]
+            - paragraph [ref=e46]: Powerful TanStack (React) SaaS admin template with file-based routing, TanStack Query, 1000+ components, and dark mode.
+            - generic [ref=e47]:
+              - generic [ref=e48]: TanStack Router
+              - generic [ref=e49]: TanStack Query
+              - generic [ref=e50]: React
+              - generic [ref=e51]: Vite
+            - generic [ref=e52]:
+              - generic [ref=e53]:
+                - generic [ref=e54]:
+                  - superscript [ref=e55]: $
+                  - text: "49"
+                - generic [ref=e56]: One-time · ThemeForest
+              - generic [ref=e57]:
+                - link "Preview" [ref=e58] [cursor=pointer]:
+                  - /url: https://preview.themeforest.net/item/jampack-powerful-tanstackreact-saas-app-template/full_screen_preview/64043060
+                - link "Buy Now" [ref=e59] [cursor=pointer]:
+                  - /url: https://themeforest.net/item/jampack-powerful-tanstackreact-saas-app-template/64043060?s_rank=1
+        - article [ref=e62]:
+          - generic [ref=e73]:
+            - generic [ref=e74]: React 19
+            - heading "Jampack React" [level=3] [ref=e76]
+            - paragraph [ref=e77]: Powerful React SaaS admin template with 1000+ components, 10+ built-in apps, multi-layout, and dark mode.
+            - generic [ref=e78]:
+              - generic [ref=e79]: React 19
+              - generic [ref=e80]: Vite
+              - generic [ref=e81]: Redux
+              - generic [ref=e82]: 1000+ Components
+            - generic [ref=e83]:
+              - generic [ref=e84]:
+                - generic [ref=e85]:
+                  - superscript [ref=e86]: $
+                  - text: "49"
+                - generic [ref=e87]: One-time · ThemeForest
+              - generic [ref=e88]:
+                - link "Preview" [ref=e89] [cursor=pointer]:
+                  - /url: https://preview.themeforest.net/item/jampack-powerful-reactbootstrap-saas-app-template/full_screen_preview/45552246?ref=jampack.hencework.com
+                - link "Buy Now" [ref=e90] [cursor=pointer]:
+                  - /url: https://themeforest.net/item/jampack-powerful-reactbootstrap-saas-app-template/45552246?ref=jampack.hencework.com
+        - article [ref=e93]:
+          - generic [ref=e100]:
+            - generic [ref=e101]: Next.js 15
+            - heading "Jampack Next.js" [level=3] [ref=e103]
+            - paragraph [ref=e104]: Robust Next.js SaaS admin template. App Router ready with server components, multiple layouts and a rich component library.
+            - generic [ref=e105]:
+              - generic [ref=e106]: Next.js 15
+              - generic [ref=e107]: App Router
+              - generic [ref=e108]: TypeScript
+            - generic [ref=e109]:
+              - generic [ref=e110]:
+                - generic [ref=e111]:
+                  - superscript [ref=e112]: $
+                  - text: "49"
+                - generic [ref=e113]: One-time · ThemeForest
+              - generic [ref=e114]:
+                - link "Preview" [ref=e115] [cursor=pointer]:
+                  - /url: https://preview.themeforest.net/item/jampack-robust-nextjs-saas-app-template/full_screen_preview/48291224?ref=jampack.hencework.com
+                - link "Buy Now" [ref=e116] [cursor=pointer]:
+                  - /url: https://themeforest.net/item/jampack-robust-nextjs-saas-app-template/48291224?ref=jampack.hencework.com
+        - article [ref=e119]:
+          - img "Remix" [ref=e124]
+          - generic [ref=e125]:
+            - generic [ref=e126]: Remix
+            - heading "Jampack Remix" [level=3] [ref=e128]
+            - paragraph [ref=e129]: Modern Remix admin template. Nested routing, loaders, actions, and the same powerful component set as the full Jampack suite.
+            - generic [ref=e130]:
+              - generic [ref=e131]: Remix
+              - generic [ref=e132]: React
+              - generic [ref=e133]: Dark Mode
+            - generic [ref=e134]:
+              - generic [ref=e135]:
+                - generic [ref=e136]:
+                  - superscript [ref=e137]: $
+                  - text: "49"
+                - generic [ref=e138]: One-time · ThemeForest
+              - generic [ref=e139]:
+                - link "Preview" [ref=e140] [cursor=pointer]:
+                  - /url: https://preview.themeforest.net/item/jampack-modern-remix-saas-app-template/full_screen_preview/50271704?ref=jampack.hencework.com
+                - link "Buy Now" [ref=e141] [cursor=pointer]:
+                  - /url: https://themeforest.net/item/jampack-modern-remix-saas-app-template/50271704?ref=jampack.hencework.com
+      - generic [ref=e144]: Vue & Nuxt
+      - generic [ref=e147]:
+        - article [ref=e148]:
+          - generic [ref=e156]:
+            - generic [ref=e157]: Vue 3
+            - heading "Jampack Vue" [level=3] [ref=e159]
+            - paragraph [ref=e160]: Advanced Vue 3 SaaS admin template. Composition API, Pinia state management, full dark mode, and 1000+ UI components.
+            - generic [ref=e161]:
+              - generic [ref=e162]: Vue 3
+              - generic [ref=e163]: Pinia
+              - generic [ref=e164]: Vite
+              - generic [ref=e165]: Dark Mode
+            - generic [ref=e166]:
+              - generic [ref=e167]:
+                - generic [ref=e168]:
+                  - superscript [ref=e169]: $
+                  - text: "49"
+                - generic [ref=e170]: One-time · ThemeForest
+              - generic [ref=e171]:
+                - link "Preview" [ref=e172] [cursor=pointer]:
+                  - /url: https://preview.themeforest.net/item/jampack-advanced-vuejsbootstrap-saas-app-template/full_screen_preview/53318080?ref=jampack.hencework.com
+                - link "Buy Now" [ref=e173] [cursor=pointer]:
+                  - /url: https://themeforest.net/item/jampack-advanced-vuejsbootstrap-saas-app-template/53318080?ref=jampack.hencework.com
+        - article [ref=e176]:
+          - img "Nuxt" [ref=e181]
+          - generic [ref=e182]:
+            - generic [ref=e183]: Nuxt 4
+            - heading "Jampack Nuxt" [level=3] [ref=e185]
+            - paragraph [ref=e186]: Intuitive Nuxt 4 admin template. SSR/SSG ready, auto-imports, Pinia, and the complete Jampack component ecosystem.
+            - generic [ref=e187]:
+              - generic [ref=e188]: Nuxt 4
+              - generic [ref=e189]: SSR
+              - generic [ref=e190]: Pinia
+            - generic [ref=e191]:
+              - generic [ref=e192]:
+                - generic [ref=e193]:
+                  - superscript [ref=e194]: $
+                  - text: "49"
+                - generic [ref=e195]: One-time · ThemeForest
+              - generic [ref=e196]:
+                - link "Preview" [ref=e197] [cursor=pointer]:
+                  - /url: https://preview.themeforest.net/item/jampack-intuitive-nuxtbootstrap-saas-app-template/full_screen_preview/55958251?ref=jampack.hencework.com
+                - link "Buy Now" [ref=e198] [cursor=pointer]:
+                  - /url: https://themeforest.net/item/jampack-intuitive-nuxtbootstrap-saas-app-template/55958251?ref=jampack.hencework.com
+      - generic [ref=e201]: Svelte & HTML
+      - generic [ref=e204]:
+        - article [ref=e205]:
+          - img "Svelte" [ref=e210]
+          - generic [ref=e211]:
+            - generic [ref=e212]: Svelte 5
+            - heading "Jampack Svelte" [level=3] [ref=e214]
+            - paragraph [ref=e215]: Powerful SvelteKit admin template using Svelte 5 runes. File-based routing, SSR, and the full Jampack UI component set.
+            - generic [ref=e216]:
+              - generic [ref=e217]: SvelteKit
+              - generic [ref=e218]: Svelte 5
+              - generic [ref=e219]: Runes
+            - generic [ref=e220]:
+              - generic [ref=e221]:
+                - generic [ref=e222]:
+                  - superscript [ref=e223]: $
+                  - text: "39"
+                - generic [ref=e224]: One-time · ThemeForest
+              - generic [ref=e225]:
+                - link "Preview" [ref=e226] [cursor=pointer]:
+                  - /url: https://preview.themeforest.net/item/jampack-powerful-sveltekitbootstrap-saas-app-template/full_screen_preview/59752911?ref=jampack.hencework.com
+                - link "Buy Now" [ref=e227] [cursor=pointer]:
+                  - /url: https://themeforest.net/item/jampack-powerful-sveltekitbootstrap-saas-app-template/59752911?ref=jampack.hencework.com
+        - article [ref=e230]:
+          - img "HTML5" [ref=e235]
+          - generic [ref=e236]:
+            - generic [ref=e237]: HTML 5
+            - heading "Jampack HTML" [level=3] [ref=e239]
+            - paragraph [ref=e240]: The classic HTML admin template. Zero build step, works everywhere. The original Jampack with complete CRM, apps, and component pages.
+            - generic [ref=e241]:
+              - generic [ref=e242]: HTML5
+              - generic [ref=e243]: jQuery
+              - generic [ref=e244]: No Build
+            - generic [ref=e245]:
+              - generic [ref=e246]:
+                - generic [ref=e247]:
+                  - superscript [ref=e248]: $
+                  - text: "49"
+                - generic [ref=e249]: One-time · ThemeForest
+              - generic [ref=e250]:
+                - link "Preview" [ref=e251] [cursor=pointer]:
+                  - /url: https://preview.themeforest.net/item/jampack-admin-crm-application-template/full_screen_preview/38931392?ref=jampack.hencework.com
+                - link "Buy Now" [ref=e252] [cursor=pointer]:
+                  - /url: https://themeforest.net/item/jampack-admin-crm-application-template/38931392?ref=jampack.hencework.com
+    - generic [ref=e257]:
+      - generic [ref=e258]:
+        - generic [ref=e259]: SaaS Starter Kits
+        - heading "Ship your Next.js SaaS in days, not months" [level=2] [ref=e260]: Ship your Next.js SaaSin days, not months
+        - paragraph [ref=e261]: Production-Ready Next.js Multi-tenant SaaS Starter Kit with Supabase Auth, billing, AI Chat & Blog CMS.
+      - article [ref=e263]:
+        - generic [ref=e264]: 192+ hrs of dev time saved
+        - generic [ref=e269]:
+          - generic [ref=e270]:
+            - generic [ref=e271]: Featured
+            - generic [ref=e272]: SaaS Kit
+            - generic [ref=e273]: CodeCanyon
+          - heading "Jampack Next.js SaaS Starter" [level=3] [ref=e274]
+          - paragraph [ref=e275]: Production-ready Next.js multi-tenant SaaS boilerplate. Ships with authentication, Stripe/Paddle/LemonSqueezy billing, AI chat (Gemini, DeepSeek, OpenRouter), blog CMS with TinyMCE, team management, PostgreSQL + Prisma, and full i18n in 8 languages. Available in Tailwind/Shadcn variants.
+          - generic [ref=e276]:
+            - generic [ref=e277]: Next.js 15
+            - generic [ref=e278]: Supabase Auth
+            - generic [ref=e279]: Prisma
+            - generic [ref=e280]: Stripe
+            - generic [ref=e281]: AI Chat
+            - generic [ref=e282]: Multi-tenant
+            - generic [ref=e283]: Tailwind/Shadcn
+          - generic [ref=e284]:
+            - generic [ref=e285]:
+              - generic [ref=e286]:
+                - superscript [ref=e287]: $
+                - text: "49"
+              - generic [ref=e288]: One-time · CodeCanyon
+            - generic [ref=e289]:
+              - link "Preview" [ref=e290] [cursor=pointer]:
+                - /url: https://preview.codecanyon.net/item/jampack-nextjs-saas-starter-kit-multitenancy-with-supabase-auth-billing-ai-chat-blog-cms/full_screen_preview/62495359?ref=jampack.hencework.com
+              - link "Buy Now" [ref=e291] [cursor=pointer]:
+                - /url: https://codecanyon.net/item/jampack-nextjs-saas-starter-kit-multitenancy-with-supabase-auth-billing-ai-chat-blog-cms/62495359?ref=jampack.hencework.com
+    - generic [ref=e298]:
+      - generic [ref=e299]:
+        - heading "Not sure which product fits your needs?" [level=3] [ref=e300]
+        - paragraph [ref=e301]:
+          - text: Our team is happy to help you find the right solution. Reach out to us at
+          - link "contact@hencework.com" [ref=e302] [cursor=pointer]:
+            - /url: mailto:contact@hencework.com
+          - text: and we'll guide you to the best fit for your project.
+      - link "Contact Us" [ref=e303] [cursor=pointer]:
+        - /url: mailto:contact@hencework.com
+    - button "Scroll down" [ref=e306] [cursor=pointer]
+    - contentinfo [ref=e312]:
+      - generic [ref=e313]:
+        - generic [ref=e314]:
+          - text: © 2026 Jampack by
+          - link "Hencework" [ref=e315] [cursor=pointer]:
+            - /url: https://hencework.com?ref=jampack.hencework.com
+          - text: . All rights reserved.
+        - generic [ref=e316]:
+          - link "Home" [ref=e317] [cursor=pointer]:
+            - /url: https://www.hencework.com/?ref=jampack.hencework.com
+          - link "ThemeForest" [ref=e318] [cursor=pointer]:
+            - /url: https://themeforest.net/user/hencework/portfolio?ref=jampack.hencework.com
+          - link "CodeCanyon" [ref=e319] [cursor=pointer]:
+            - /url: https://codecanyon.net/user/hencework/portfolio?ref=jampack.hencework.com
+          - link "Twitter" [ref=e320] [cursor=pointer]:
+            - /url: https://twitter.com/hencework?ref=jampack.hencework.com
+  - alert [ref=e321]
