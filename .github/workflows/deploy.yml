@@ -1,0 +1,56 @@
+# Builds the static export and publishes out/ to GitHub Pages.
+#
+# Only main deploys. Feature branches are checked locally with /verify;
+# there is no PR automation.
+# One-time manual step: in the repo Settings > Pages, set the source to
+# "GitHub Actions". Until then Pages keeps serving the files at the root of
+# main and the deploy job fails with a pointer to that settings page.
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Never run two deployments at once; let a running one finish.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      # No `version` input: pnpm/action-setup reads packageManager from package.json,
+      # and setting both is an error.
+      - uses: pnpm/action-setup@v6
+      # Must run after pnpm is installed for the store cache to work.
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm lint
+      - run: pnpm build
+      # Bare on purpose: `static_site_generator: next` only knows next.config.js
+      # and would write a second config next to next.config.ts.
+      - uses: actions/configure-pages@v6
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: out
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v5

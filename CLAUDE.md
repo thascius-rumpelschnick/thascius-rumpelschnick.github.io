@@ -64,7 +64,7 @@ reasonable assumption is necessary, state it explicitly.
 ## GitHub Pages
 
 - This is a user site (`thascius-rumpelschnick.github.io`) served from the domain root, so no base path, `basePath`, or `assetPrefix` is needed. Static export is configured in `next.config.ts` (`output: "export"`, `trailingSlash`, unoptimized images); `pnpm build` produces the deployable `out/` directory.
-- How `out/` gets deployed is not decided yet (no workflow, no gh-pages branch). Do not set one up without asking.
+- `out/` is deployed by the GitHub Actions workflow in `.github/workflows/deploy.yml`: every push to `main` (or a manual run) installs with pnpm, lints, builds and uploads `out/` as the Pages artifact. Feature branches never deploy. The repo's Pages source must be set to "GitHub Actions" in Settings once, by hand; until then Pages keeps serving the legacy files at the root of `main`.
 
 ## Git
 
