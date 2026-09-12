@@ -4,6 +4,11 @@
     "context7@claude-plugins-official": true,
     "playwright@claude-plugins-official": false
   },
+  "permissions": {
+    "allow": [
+      "Bash(pnpm *)"
+    ]
+  },
   "prefersReducedMotion": true,
   "sandbox": {
     "allowUnsandboxedCommands": false,

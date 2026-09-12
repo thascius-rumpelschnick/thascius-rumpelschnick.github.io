@@ -43,7 +43,7 @@ reasonable assumption is necessary, state it explicitly.
 - No `npx`: launch one-off CLIs and MCP servers with `pnpm dlx`. Project MCP servers are defined in `.mcp.json`.
 - Run `pnpm install` before any script.
 - pnpm settings live in `pnpm-workspace.yaml`, not in `package.json`. pnpm 12 fails an install when a dependency has an unreviewed postinstall script (`strictDepBuilds` defaults to on), so a new dependency with a build script needs an `allowBuilds` verdict there. `unrs-resolver` is deliberately `false`; its script only installs a WASM fallback that the native bindings make unnecessary.
-- Stack: Next.js 16 (App Router, Turbopack), React 19, TypeScript 6. The app was scaffolded by hand from the Next.js manual-installation guide, so there is no Tailwind, no global stylesheet, and no create-next-app boilerplate. Routes live in `src/app/`; `@/*` resolves to `src/*`.
+- Stack: Next.js 16 (App Router, Turbopack), React 19, TypeScript 6. The app was scaffolded by hand from the Next.js manual-installation guide, so there is no Tailwind and no create-next-app boilerplate. Styling is CSS Modules per component plus `src/app/globals.css` (tokens, reset, base elements); Kumbh Sans loads through `next/font/local`; icons are inline SVG from `src/components/icons/Icon.tsx`. Routes live in `src/app/`; `@/*` resolves to `src/*`.
 - `typescript` is an npm alias for `@typescript/typescript6`. TypeScript 7 is the native compiler and ships no JavaScript API, so typescript-eslint, and with it `eslint-config-next`, refuses to load against it. Microsoft documents the alias as the bridge until tools support the TS 7.1+ API. Do not bump `typescript` to 7 until `pnpm lint` works with it.
 - ESLint is pinned to major 9. `eslint-config-next` itself accepts 10, but the react, import and jsx-a11y plugins it pulls in do not declare support for it yet, and create-next-app pins `^9` too. npm marks 9.x as deprecated; move to 10 once those plugins declare support for it.
 - Scripts:
@@ -58,7 +58,7 @@ reasonable assumption is necessary, state it explicitly.
 
 ## Repo layout
 
-- `src/app/` is the App Router tree (`layout.tsx`, `page.tsx`). `public/` holds files served as-is from the domain root.
+- `src/app/` is the App Router tree (`layout.tsx`, `page.tsx`, `globals.css`, `fonts/`). `src/components/<name>/` holds one folder per component (`Name.tsx`, `Name.module.css`, colocated images). `public/` holds files served as-is from the domain root.
 - `legacy/` is a **read-only content source**. `legacy/index.html` (CV site) and `legacy/ti/` (FSM / Turing-machine visualizer) are what the new app should reproduce. Never edit anything under `legacy/`; use `/port-legacy <section>` to bring content over.
 
 ## GitHub Pages

@@ -1,3 +1,14 @@
+import localFont from "next/font/local"
+import "./globals.css"
+
+const kumbhSans = localFont({
+  src: [
+    { path: "./fonts/KumbhSans-Light.ttf", weight: "300" },
+    { path: "./fonts/KumbhSans-Regular.ttf", weight: "400" },
+    { path: "./fonts/KumbhSans-Bold.ttf", weight: "700" },
+  ],
+})
+
 export default function RootLayout({
   children,
 }: {
@@ -5,7 +16,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body className={kumbhSans.className}>{children}</body>
     </html>
   )
 }

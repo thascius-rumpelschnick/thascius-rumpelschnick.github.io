@@ -1,0 +1,9 @@
+/* Mirrors Font Awesome's .svg-inline--fa: icons scale with the surrounding font size. */
+.icon {
+  display: inline-block;
+  box-sizing: content-box;
+  height: 1em;
+  overflow: visible;
+  vertical-align: -0.125em;
+  fill: currentColor;
+}
