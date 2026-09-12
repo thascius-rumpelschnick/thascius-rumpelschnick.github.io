@@ -1,0 +1,10 @@
+// Ported from the #bg-img rule in legacy/styles/style.css.
+.backgroundImage {
+  background-image: url("./coding-developing.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: absolute;
+  width: 100%;
+  height: 500px;
+}
