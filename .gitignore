@@ -22,3 +22,10 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Claude Code personal settings and harness scratch
+.claude/settings.local.json
+.claude/.cc-writes/
+
+# Project
+scratch.md
