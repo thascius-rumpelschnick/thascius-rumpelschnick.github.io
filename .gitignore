@@ -7,10 +7,19 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# Dependencies
 node_modules
-dist
-dist-ssr
+
+# Next.js (all generated; next-env.d.ts is rewritten by `next dev`/`next build`)
+.next/
+out/
+next-env.d.ts
+*.tsbuildinfo
+
+# Environment and secrets
+.env*
 *.local
+*.pem
 
 # Editor directories and files
 .vscode/*

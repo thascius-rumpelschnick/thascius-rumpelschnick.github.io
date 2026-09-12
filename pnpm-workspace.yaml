@@ -1,0 +1,7 @@
+# pnpm settings live here, not in package.json (pnpm >= 10).
+# strictDepBuilds is on by default, so every dependency with a postinstall
+# script needs an explicit verdict. unrs-resolver's script only installs a
+# WASM fallback when no native binding matches the platform; the darwin and
+# linux bindings ship as optional dependencies, so the script stays blocked.
+allowBuilds:
+  unrs-resolver: false
